@@ -1,0 +1,7 @@
+{
+    "name": "gafouni/blog",
+    "require": {
+        "twig/twig": "^3.3",
+        "symfony/http-foundation": "^5.4"
+    }
+}
