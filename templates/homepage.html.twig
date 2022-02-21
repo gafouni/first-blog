@@ -1,0 +1,154 @@
+{% extends "base.html.twig" %}
+{% block title %}Gafouni-first-blog{% endblock %}
+{% block content %}
+
+
+        
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Haoua Abouna</h1>
+                            <span class="subheading">Developpeuse web PHP/Symfony</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <h2 class="post-title">Bienvenu dans l'aventure!</h2>
+                        <p class="post-subtitle">Nouvelle developpeuse back end, je suis passionnee par l'informatique 
+                            et les nouvelles technologies. Je m'interresse aussi a l'entrepreunariat et a l'environnement
+                            des start-up.
+                        </p>   
+                    </div>
+                    <div class="post-review" style="text-align: center;">
+                        <img src="assets/img/about-bg.jpg" alt="photo carte voyage"/>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <h2 class="post-title">Mes preferences</h2>
+                        
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">    
+                        <h3 class="post-subtitle">Developpement web - Gestion de projets</h3>
+                        <p>
+                            J’attache de l’importance à la qualité et l’accessibilité des projets web 
+                            sur lesquels je travaille. Retrouvons-nous sur mon blog pour en parler et 
+                            echanger nos points de vue. 
+                        </p>
+
+                    </div>
+                    
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                            <h3 class="post-subtitle">Blog - Actualites - Veille technologique</h3>
+                            <p>
+                                Comment s'y retrouver dans la jungle des nouvelles technologies du web, partageons 
+                                les meilleures pratiques, les dernieres sorties et mises a jour.
+                            </p>
+                        
+                    </div>
+
+
+                    
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Pager-->
+                   
+                </div>
+            </div>
+        </div>
+
+<!--Contact form-->
+<!-- Contact form Header-->
+<header class="masthead" style="background-image: url('assets/img/contact-bg.jpg');height: 150px;">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h2>Contactez-moi</h2>
+                    <span class="subheading">N'hesitez pas a poser toutes vos questions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Contact form Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>Envoyez vos messages dans le formulaire ci-dessous et je vous repondrai des que possible!</p>
+                <div class="my-5">
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * SB Forms Contact Form * *-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- This form is pre-integrated with SB Forms.-->
+                    <!-- To make this form functional, sign up at-->
+                    <!-- https://startbootstrap.com/solution/contact-forms-->
+                    <!-- to get an API token!-->
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <div class="form-floating">
+                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                            <label for="name">Nom</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Entrez votre nom et prenom</div>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
+                            <label for="email">Adresse email</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">Entrez votre adresse email</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Adresse email invalide</div>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" id="phone" type="tel" placeholder="Enter your phone number..." data-sb-validations="required" />
+                            <label for="phone">Numero de telephone</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">Entrez votre numero de telephone</div>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" id="message" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                            <label for="message">Message</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">Entrez votre message</div>
+                        </div>
+                        <br />
+                        <!-- Submit success message-->
+                        <!---->
+                        <!-- This is what your users will see when the form-->
+                        <!-- has successfully submitted-->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Votre message a ete bien envoye!</div>
+                                To activate this form, sign up at
+                                <br />
+                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
+                        </div>
+                        <!-- Submit error message-->
+                        <!---->
+                        <!-- This is what your users will see when there is-->
+                        <!-- an error submitting the form-->
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        <!-- Submit Button-->
+                        <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+{% endblock %}
