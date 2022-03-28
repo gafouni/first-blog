@@ -29,8 +29,9 @@ class PostRepository extends CoreRepository{
         foreach($postsData as $postData){
             $posts[]= new Post($postData['id'], $postData['title'], $postData['author'], $postData['date'], $postData['content'], $postData['published'], $userRepository->find($postData['id_user']));
         }
-        
     
         return $posts;
     }
+
+    
 }
