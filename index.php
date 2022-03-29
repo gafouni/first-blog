@@ -7,12 +7,19 @@
     use App\Controller\PostController;
 
   
-
    
-    /* $controller=new HomepageController;
-    $controller->display();
- */
-    $controller=new PostController;
-    $controller->display_list();
+    $controllerName=$_GET['c'] ?? null;
+   switch($controllerName){
+      case 'post': 
+         $controller=new PostController;
+         $controller->display_list();
+         break;
+
+      default: 
+         $controller=new HomepageController;
+         $controller->display();  
+   }
+   
+ 
 
 
