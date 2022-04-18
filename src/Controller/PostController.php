@@ -11,4 +11,13 @@ class PostController extends CoreController{
         echo $this->twig->render('postpage.html.twig', ['posts'=>$posts]);
         
     }
+
+    public function show($id){
+        $postRepository = new PostRepository;
+        $post = $postRepository->find($id);
+        
+
+        echo $this->twig->render('showpage.html.twig', ['post'=>$post]);
+        
+    }    
 }

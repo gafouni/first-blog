@@ -1,9 +1,10 @@
 <?php
 namespace App\Repository;
 use App\Entity\Post;
+
 class PostRepository extends CoreRepository{
-    public function find(int $id): ?Post{
-        $pdo_st=$this->pdo->prepare('select * from post where id = :id');
+    public function find($id): ?Post{
+        $pdo_st=$this->pdo->prepare('select * from post where \:id = $id');
         $pdo_st->bindValue(':id',$id);
         $pdo_st->execute();
         $postData=$pdo_st->fetch();
@@ -16,7 +17,9 @@ class PostRepository extends CoreRepository{
         $userRepository = new UserRepository();
 
 
-        return new Post($postData['id'], $postData['title'], $postData['author'], $postData['date'], $postData['content'], $postData['published'], $userRepository->find($postData['id_user']));
+        $post = new Post($postData['id'], $postData['title'], $postData['author'], $postData['date'], $postData['content'], $postData['published'], $userRepository->find($postData['id_user']));
+    
+        return $post;
     }
     public function findAll(): array{
         $posts=[];

@@ -3,4 +3,4 @@ RewriteEngine On
 RewriteBase /Projet%205/first-blog/
 RewriteCond %{REQUEST_URI} !-d
 RewriteCond %{REQUEST_URI} !-f
-RewriteRule (.*).html$ /index.php?c=$1& [QSA,L]
+RewriteRule (.*).html$ /index.php?c=$1 [QSA,L]
