@@ -4,7 +4,7 @@ use App\Entity\Post;
 
 class PostRepository extends CoreRepository{
     public function find($id): ?Post{
-        $pdo_st=$this->pdo->prepare('select * from post where \:id = $id');
+        $pdo_st=$this->pdo->prepare('select * from post where :id = $id');
         $pdo_st->bindValue(':id',$id);
         $pdo_st->execute();
         $postData=$pdo_st->fetch();
