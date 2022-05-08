@@ -25,6 +25,20 @@ class UserController extends CoreController{
 
     public function register(){
 
+        //On verifie si le formulaire est valide
+
+
+
+
+        //On nettoie l'adresse mail (strip_tags)
+
+
+
+        //On chiffre le mot de passe
+
+
+
+
         $form = new RegisterForm;
 
         echo $this->twig->render('register.html.twig', ['registerForm' => $form->createForm()]);
