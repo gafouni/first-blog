@@ -3,7 +3,7 @@ namespace App\Forms;
 
 class Form {
 
-    private $formCode ='';
+    protected $formCode ='';
 
     /**Methode qui servira a generer (creer) le formulaire html */
     public function createForm()
@@ -15,7 +15,7 @@ class Form {
 
     /**Methode qui permet d'ajouter a un tableau des attributs envoyes a la balise 'input'(id, required etc)*/
 
-    private function addAttributes(array $attributes): string
+    protected function addAttributes(array $attributes): string
     {
         //On initialise une chaine de caracteres
         $str = '';
@@ -60,7 +60,7 @@ class Form {
 
     /**Methode: ajout d'un champ input */
     public function addInput(string $type, string $nom, array $attributes = []):self{
-        $this->formcode .= "<input type='$type' name='$nom'";
+        $this->formCode .= "<input type='$type' name='$nom'";
         $this->formCode .= $attributes ? $this->addAttributes($attributes).'>' : '>';
 
         return $this;

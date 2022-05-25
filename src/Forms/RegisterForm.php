@@ -9,7 +9,7 @@ class RegisterForm extends Form{
     public function registerForm(){
 
 
-        $form->debutForm()
+    return $this->debutForm()
             ->addLabelFor('prenom', 'Prenom :')
             ->addInput('text', 'prenom', ['id' => 'prenom', 'class' =>'form-control'])
             ->addLabelFor('nom', 'Nom :')

@@ -1,5 +1,6 @@
 <?php 
 
+   session_start();
 
     require 'vendor/autoload.php';
 
@@ -10,7 +11,7 @@
 
   
    
-    $controllerName=$_GET['c'] ?? null;
+   $controllerName=$_GET['c'] ?? null;
    switch($controllerName){
       case 'post': 
          $controller=new PostController;
@@ -25,6 +26,11 @@
       case 'register':
          $controller=new UserController;
          $controller->register();
+         break;    
+
+      case 'profile':
+         $controller=new UserController;
+         $controller->profile();
          break;    
 
       default: 

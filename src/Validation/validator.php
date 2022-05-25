@@ -34,16 +34,16 @@ class Validator {
             }
         }
 
-        return $this->getErrors;
+        return $this->getErrors();
     }
 
 
     private function required(string $name, string $value){
 
-        $value = trim(value);
+        $value = trim($value);
         
         if (!isset($value) || is_null($value) || empty($value)){
-            $this->$errors[$name][] = "{$name} est requis.";
+            $this->errors[$name][] = "{$name} est requis.";
         }
     }
 
@@ -60,7 +60,7 @@ class Validator {
     }
 
 
-    private function geterrors(): ?array{
+    private function getErrors(): ?array{
 
         return $this->errors;
     }
