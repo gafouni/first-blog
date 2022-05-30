@@ -20,9 +20,9 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <h3>Bonjour {{ $user.first_name }}, </h3>
+                        <h2>Bonjour {{user.firstName}} !, </h2>
 
-                        <h2>Merci de nous avoir propose les articles ci-dessous:</h2>
+                        <h3>Merci de nous avoir propose les articles ci-dessous:</h3>
 
                         {% for post in posts %}
                             <a href="post.html">

@@ -31,14 +31,14 @@ class UserRepository extends CoreRepository{
         return new User($userData['id'], $userData['first_name'], $userData['last_name'], $userData['email'], $userData['password'], $userData['status']);
     } 
 
-    public function create(){
-        $pdo_st=$this->pdo->prepare("INSERT INTO `user` ('first_name', 'last_name', 'email', 'password') VALUES (:first_name, :last_name, :email, :password)");
-        $pdo_st->bindValue(':first_name',$first_name);
-        $pdo_st->bindValue(':last_name',$last_name);
-        $pdo_st->bindValue(':email',$email);
-        $pdo_st->bindValue(':password',$password);
+    public function create( User $user){
+        $pdo_st=$this->pdo->prepare("INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`) VALUES (:first_name, :last_name, :email, :password)");
+        $pdo_st->bindValue(':first_name',$user->getFirstName());
+        $pdo_st->bindValue(':last_name',$user->getLastName());
+        $pdo_st->bindValue(':email',$user->getEmail());
+        $pdo_st->bindValue(':password',$user->getPassword());
         $pdo_st->execute();
-        $userData=$pdo_st->fetch();
+      
     
     }    
 
