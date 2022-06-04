@@ -47,6 +47,11 @@
          $controller->profile();
          break;    
 
+      case 'newPost':
+         $controller=new PostController;
+         $controller->addNewPost();
+         break;   
+
       default: 
          $controller=new HomepageController;
          $controller->display();  
