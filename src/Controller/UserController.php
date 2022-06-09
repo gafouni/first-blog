@@ -31,7 +31,7 @@ class UserController extends CoreController{
                 //On va chercher l'utilisateur dans la base de donnee
                 $userRepository = new UserRepository;
                 $user = $userRepository->findOneByEmail(strip_tags($_POST['email']));
-                var_dump($user);
+                //var_dump($user);
                 
                 //Si l'utilisateur n'existe pas
                 if(!$user){
@@ -125,7 +125,7 @@ class UserController extends CoreController{
         $user = unserialize($_SESSION['user']);
         $postRepository = new PostRepository;
         $posts = $postRepository->findAllByUser($user);
-        var_dump($posts);
+        //var_dump($posts);
         echo $this->twig->render('profile.html.twig', ['user'=>$user, 'posts'=>$posts] );
 
     }

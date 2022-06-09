@@ -2,12 +2,12 @@
 namespace App\Entity;
 
 class Post{
-    private int $id;
+    private ?int $id;
     private string $date;
     private string $author;
     private string $title;
     private string $content;
-    private string $published;
+    private ?string $published;
     private User $user;
 
 
