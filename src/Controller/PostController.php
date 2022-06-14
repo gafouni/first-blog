@@ -1,9 +1,11 @@
 <?php
 namespace App\Controller;
+
 use App\Entity\Post;
+use App\Forms\UpdateForm;
 use App\Forms\NewPostForm;
-use App\Repository\PostRepository;
 use App\Validation\Validator;
+use App\Repository\PostRepository;
 
 
 class PostController extends CoreController{ 
@@ -27,10 +29,8 @@ class PostController extends CoreController{
     
     public function addNewPost(){
         //On verifie si l'utilisateur est connecte
-        if(isset($_SESSION['user']) && !empty($_SESSION['user']['id'])){
-        //if (isset($_POST['email'])){
-        //var_dump($_SESSION['user']);    
-        //die();    
+        
+        if($this->isConnected() && !empty($_POST['title'])){
         
             //On verifie si le formulaire est valide
             $validator = new Validator($_POST);
@@ -39,15 +39,15 @@ class PostController extends CoreController{
                 'author' =>['required'],
                 'date' =>['required'],
                 'content' =>['required'],
-                'user' =>['required']
+                
             ]);
             //var_dump('aaa');
             //die;
-
+            
             if ($errors) {
                 //var_dump('bbb');
                 $_SESSION['errors'][] = $errors;
-                header('location:/newPost');
+                header('location:?c=newPost');
                 exit;
             }    
 
@@ -61,29 +61,90 @@ class PostController extends CoreController{
                 // On hydrate l'utilisateur et on le stocke en base de donnees
                 $postRepository = new PostRepository;
 
-                $post = new Post(null, $title, $author, $date, $content, null, $_SESSION['user']['id']);
+                
+                $post = new Post(null, $title, $author, $date, $content, null, $this->getConnectedUser());
                 $postRepository->create($post);
-                //var_dump('xxx');
-                //die;
+                
                 $_SESSION['message'] = "votre article a ete cree avec succes!";
                 header('Location: ?c=profile');
             
-            
-
-        // }else{
-        //     $_SESSION['erreur'] = "Vous devez etre connectes pour acceder a cette page";
-        //     header('Location: ?c=login');
-        //     exit;
-
         }
 
         $form = new NewPostForm;
 
         echo $this->twig->render('newPost.html.twig', ['newPostForm' => $form->newPostForm()->createForm()]);
         
-    
-        
-        
-
     }
+
+    public function update($id){
+        //On verifie si l'utilisateur est connecte
+        if($this->isConnected() && !empty($_POST['title'])){
+            
+
+            //On verifie que l'article existe dans la base, on va le chercher avec l'id 
+            $postRepository = new PostRepository;
+            $post = $postRepository->find($id);
+            
+        //Si l'annonce n'existe pas, on retourne a la liste des articles
+            if(!$annonce){
+                http_response_code(404);
+                $_SESSION['erreur'] = "L'article recherche n'existe pas";
+                header('Location:?c=update');
+                exit;
+            }
+
+            //On verifie si l'utilisateur est proprietaire de l'article
+            if($post->users_id !== $_SESSION['user']['id']){
+                $_SESSION['erreur'] = "Vous n'avez pas acces a cette page";
+                header('Location:?c=post');
+                exit;
+            }
+
+            //On verifie si le formulaire est valide
+            $validator = new Validator($_POST);
+            $errors =  $validator->validate([
+                'title' =>['required'],
+                'author' =>['required'],
+                'date' =>['required'],
+                'content' =>['required'],
+                
+            ]);
+            //var_dump('aaa');
+            //die;
+            
+            if ($errors) {
+                //var_dump('bbb');
+                $_SESSION['errors'][] = $errors;
+                header('location:?c=update');
+                exit;
+            }    
+
+                //Protection contre les failles xss
+                $id = strip_tags($_POST['id']);
+                $title = strip_tags($_POST['title']);
+                $author = strip_tags($_POST['author']);
+                $date = strip_tags($_POST['date']);
+                $content = strip_tags($_POST['content']);
+                $user = strip_tags($_POST['user']);
+
+                //On stocke l'annonce
+                $post = new Post(null, $title, $author, $date, $content, null, $this->getConnectedUser());
+                $postRepository->update();
+
+                $_SESSION['message'] = "votre article a ete modifie avec succes!";
+                header('Location: ?c=profile');
+
+        }
+
+        //On envoie a la vue
+        $form = new UpdateForm;
+
+        echo $this->twig->render('update.html.twig', ['updateForm' => $form->updateForm()->createForm()]);
+   
+    }
+
+    
+
+
+
 }

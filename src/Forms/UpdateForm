@@ -1,0 +1,29 @@
+<?php
+namespace App\Forms;
+
+
+
+class UpdateForm extends Form{
+
+/**Creation du formulaire de modification d'un article */
+    public function updateForm(){
+
+
+        return $this->debutForm()
+        ->addLabelFor('titre', 'Titre de l\'article :')
+        ->addInput('text', 'title', ['id' => 'titre', 'class' =>'form-control', 'value' =>$post->title])
+        ->addLabelFor('auteur', 'Auteur :')
+        ->addInput('text', 'author', ['id' => 'auteur', 'class' => 'form-control', 'value' =>$post->author])
+        ->addLabelFor('date', 'Date :')
+        ->addInput('date', 'date', ['id' => 'date', 'class' =>'form-control', 'value' =>$post->date])
+        ->addLabelFor('contenu', 'Contenu de l\'article :')
+        ->addTextarea('content', $post->content, ['id' => 'contenu', 'class' => 'form-control'])
+        ->addLabelFor('publie', 'Publie le :')
+        ->addInput('date', 'publie', ['id' => 'publie', 'class' => 'form-control'])
+        ->addLabelFor('user', 'Propose par :')
+        ->addInput('text', 'user', ['id' => 'user', 'class' => 'form-control'])
+        ->addButton('Ajouter', ['class' => 'btn btn-primary'])
+        ->finForm();
+}    
+
+}

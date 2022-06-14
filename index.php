@@ -12,6 +12,7 @@
   
    
    $controllerName=$_GET['c'] ?? null;
+   $id = $_GET['id'] ?? null;
    switch($controllerName){
       case 'post': 
          $controller=new PostController;
@@ -19,16 +20,13 @@
          break;  
 
       case 'show': 
-         if (isset($_GET['id']) && $_GET['id'] > 0) {
+         if (!empty($id)) {
             $controller=new PostController;
             $controller->show($id);
         }
         else {
             echo 'Erreur : aucun identifiant de billet envoyé';
         }
-
-         // $controller=new PostController;
-         // $controller->show($id);
          break;   
 
 
@@ -50,6 +48,11 @@
       case 'newPost':
          $controller=new PostController;
          $controller->addNewPost();
+         break;   
+
+      case 'update':
+         $controller=new PostController;
+         $controller->update($id);
          break;   
 
       default: 
