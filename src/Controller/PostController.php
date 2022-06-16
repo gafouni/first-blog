@@ -77,16 +77,18 @@ class PostController extends CoreController{
     }
 
     public function update($id){
+        //On verifie que l'article existe dans la base, on va le chercher avec l'id 
+        $postRepository = new PostRepository;
+        $post = $postRepository->find($id);
+        
         //On verifie si l'utilisateur est connecte
         if($this->isConnected() && !empty($_POST['title'])){
             
 
-            //On verifie que l'article existe dans la base, on va le chercher avec l'id 
-            $postRepository = new PostRepository;
-            $post = $postRepository->find($id);
+            
             
         //Si l'annonce n'existe pas, on retourne a la liste des articles
-            if(!$annonce){
+            if(!$post){
                 http_response_code(404);
                 $_SESSION['erreur'] = "L'article recherche n'existe pas";
                 header('Location:?c=update');
@@ -94,7 +96,7 @@ class PostController extends CoreController{
             }
 
             //On verifie si l'utilisateur est proprietaire de l'article
-            if($post->users_id !== $_SESSION['user']['id']){
+            if($post->getUser()->getId() !== $this->getConnectedUser()->getId()){
                 $_SESSION['erreur'] = "Vous n'avez pas acces a cette page";
                 header('Location:?c=post');
                 exit;
@@ -120,16 +122,21 @@ class PostController extends CoreController{
             }    
 
                 //Protection contre les failles xss
-                $id = strip_tags($_POST['id']);
+                //$id = strip_tags($_POST['id']);
                 $title = strip_tags($_POST['title']);
                 $author = strip_tags($_POST['author']);
                 $date = strip_tags($_POST['date']);
                 $content = strip_tags($_POST['content']);
-                $user = strip_tags($_POST['user']);
+                //$user = strip_tags($_POST['user']);
 
-                //On stocke l'annonce
-                $post = new Post(null, $title, $author, $date, $content, null, $this->getConnectedUser());
-                $postRepository->update();
+                //On stocke l'article
+                //$post = new Post(null, $title, $author, $date, $content, null, $this->getConnectedUser());
+                $post->setTitle($title);
+                $post->setAuthor($author);
+                $post->setDate($date);
+                $post->setContent($content);
+
+                $postRepository->update($post);
 
                 $_SESSION['message'] = "votre article a ete modifie avec succes!";
                 header('Location: ?c=profile');
@@ -139,11 +146,32 @@ class PostController extends CoreController{
         //On envoie a la vue
         $form = new UpdateForm;
 
-        echo $this->twig->render('update.html.twig', ['updateForm' => $form->updateForm()->createForm()]);
+        echo $this->twig->render('update.html.twig', ['updateForm' => $form->updateForm($post)->createForm()]);
    
     }
 
+    public function delete(int $id){
+        if($this->isConnected() && !empty($_POST['title'])){
+
+            $id = strip_tags($_GET['id']);
+
+            $postRepository = new PostRepository;
+            $post = $postRepository->find($id);
+
+            //On verifie si le produit existe
+            if(!$post){
+                $_SESSION['erreur'] = "L'article recherche n'existe pas";
+                header('Location:?c=profile');
+            }    
+
+            $postRepository->delete($post);
+
+            $_SESSION['message'] = "L'article a ete bien supprime";
+                header('Location:?c=profile');
+        }    
     
+    }
+
 
 
 

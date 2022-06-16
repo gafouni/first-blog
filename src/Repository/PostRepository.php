@@ -65,17 +65,23 @@ class PostRepository extends CoreRepository{
     
     }    
 
-    public function update(int $id){
-        $pdo_st=$this->pdo->prepare("UPDATE `post` SET `title`=:title, `author`=:author, `date`=:date, `content`=:content, `user`=:user WHERE `id`=:id");
+    public function update(Post $post){
+        $pdo_st=$this->pdo->prepare("UPDATE `post` SET `title`=:title, `author`=:author, `date`=:date, `content`=:content WHERE `id`=:id");
+        $pdo_st->bindValue(':id',$post->getId());
         $pdo_st->bindValue(':title',$post->getTitle());
         $pdo_st->bindValue(':author',$post->getAuthor());
         $pdo_st->bindValue(':date',$post->getDate());
         $pdo_st->bindValue(':content',$post->getContent());
-        $pdo_st->bindValue(':user',$post->getUser()->getId());
+        //$pdo_st->bindValue(':user',$post->getUser()->getId());
         $pdo_st->execute(); 
 
     }    
 
-    
+    public function delete(Post $post){
+        $pdo_st=$this->pdo->prepare('DELETE from `post` where `id`=:id');
+        $pdo_st->bindValue(':id',$post->getId());
+        $pdo_st->execute();
+        
+    }    
 
 }

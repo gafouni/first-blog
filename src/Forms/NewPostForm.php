@@ -17,7 +17,7 @@ class NewPostForm extends Form{
             ->addLabelFor('date', 'Date :')
             ->addInput('date', 'date', ['id' => 'date', 'class' =>'form-control'])
             ->addLabelFor('contenu', 'Contenu de l\'article :')
-            ->addTextarea('content', 'content', ['id' => 'contenu', 'class' => 'form-control'])
+            ->addTextarea('content', '', ['id' => 'contenu', 'class' => 'form-control'])
             ->addLabelFor('publie', 'Publie le :')
             ->addInput('date', 'publie', ['id' => 'publie', 'class' => 'form-control'])
             ->addLabelFor('user', 'Propose par :')
