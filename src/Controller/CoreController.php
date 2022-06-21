@@ -17,6 +17,13 @@ class CoreController
    }
 
    public function getConnectedUser(){
+      
       return(unserialize($_SESSION['user']));
    }
+
+   public function isAdmin(){
+      
+      return(!empty($this->getConnectedUser()->getStatus()) == 'ROLE_ADMIN');
+   }
+   
 }

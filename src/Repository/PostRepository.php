@@ -72,7 +72,7 @@ class PostRepository extends CoreRepository{
         $pdo_st->bindValue(':author',$post->getAuthor());
         $pdo_st->bindValue(':date',$post->getDate());
         $pdo_st->bindValue(':content',$post->getContent());
-        //$pdo_st->bindValue(':user',$post->getUser()->getId());
+        
         $pdo_st->execute(); 
 
     }    

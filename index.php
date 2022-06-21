@@ -1,5 +1,6 @@
 <?php 
 
+
    session_start();
 
     require 'vendor/autoload.php';
@@ -7,7 +8,7 @@
     use App\Controller\HomepageController;
     use App\Controller\PostController;
     use App\Controller\UserController;
-    
+    use App\Controller\AdminController;
 
   
    
@@ -53,6 +54,16 @@
       case 'update':
          $controller=new PostController;
          $controller->update($id);
+         break;   
+
+      case 'deletePost':
+         $controller=new AdminController;
+         $controller->deletePost($id);
+         break;     
+
+      case 'admin':
+         $controller=new AdminController;
+         $controller->allPosts();
          break;   
 
       default: 
