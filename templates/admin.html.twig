@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+{% block title %}Gafouni-first-blog{% endblock %}
+
+{% block content %}
+
+<!-- Page Header-->
+<header class="masthead">
+    <!-- <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Haoua Abouna</h1>
+                    <span class="subheading">Developpeuse web PHP/Symfony</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</header> 
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:grey">
+        <div class="container px-4 px-lg-5">
+            {# <a class="navbar-brand" href="index.html">Gafouni-first-blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button> #}
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=admin">Articles</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Commentaires</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Messages</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Deconnexion</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+
+    <h2>Administration des articles</h2>
+
+    <div class="row justify-content-center"> 
+        <div class="col-md-2 col-lg">
+        </div>
+        <div class="col-md-8 col-lg-12"> 
+
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Publie le</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}    
+                    <tr>
+                    <th scope="row">{{post.id}}</th>
+                    <td>{{post.title}}</td>
+                    <td>{{post.date|date("d/m/Y")}}</td>
+                    <td>
+                        <a href="?c=update" class="btn btn-warning btn-sm">Modifier</a>
+                        <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div> 
+        <div class="col-md-2 col-lg">
+        </div>
+    </div>
+</body>
+
+{% endblock %}

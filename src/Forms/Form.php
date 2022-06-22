@@ -35,7 +35,7 @@ class Form {
     }
 
         /**Methode: balise d'ouverture du formulaire */
-    public function debutForm(string $methode = 'post', string $action = '#',
+    public function debutForm(string $methode = 'post', string $action = '',
     array $attributes = []): self{
         $this->formCode .= "<form action='$action' method='$methode'";
         $this->formCode .=$attributes ? $this->addAttributes($attributes).'>' : '>';

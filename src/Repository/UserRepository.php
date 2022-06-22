@@ -43,11 +43,9 @@ class UserRepository extends CoreRepository{
     }    
 
 
-    public function setSession(){
-        $_SESSION['user'] = [
-            'id' => $this->id,
-            'email' => $this->email
-        ];
+    public function setSession(User $user){
+        $_SESSION['user'] = serialize($user);
+               
     }
 
     
