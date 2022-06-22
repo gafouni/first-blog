@@ -130,7 +130,13 @@ class UserController extends CoreController{
 
     }
 
-
-
+    public function logout(){
+        //if($this->isConnected())???
+        //var_dump('$this->logout');
+        if (isset($_POST['email']) ){
+            session_destroy();
+            header('Location:?c=post');
+        }
+    }    
 
 }
