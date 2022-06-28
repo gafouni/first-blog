@@ -13,6 +13,7 @@ class UserController extends CoreController{
 
     /**Creation du formulaire de connexion */
     public function login(){
+        //var_dump($_POST);
         if (isset($_POST['email']) ){
             //var_dump('aaaa');
             //On verifie si le formulaire est valide
@@ -23,7 +24,7 @@ class UserController extends CoreController{
             ]);
 
             if ($errors) {
-                //var_dump('bbbb');
+                var_dump('bbbb');
                 $_SESSION['errors'][] = $errors;
                 header('location:?c=login');
                 
@@ -35,32 +36,41 @@ class UserController extends CoreController{
                 
                 //Si l'utilisateur n'existe pas
                 if(!$user){
-                    //var_dump('cccc');
-                    $_SESSION['erreur'] = 'L\'adresse e-mail et/ou le mot de passe est incorrect';
+                   // var_dump('cccc');
+                    $_SESSION['message'] = 'L\'adresse e-mail et/ou le mot de passe est incorrect';
                     header('location:?c=login');
                     
                 }    
 
                 //L'utilisateur existe
                
+                
 
                 //Verification du mot de passe
+                //var_dump($user);
                 if (password_verify($_POST['password'], $user->getPassword())){  
                     //var_dump('dddd');
                     $userRepository->setSession($user);
-                    header('Location:?c=profile');
+                   // header('Location:?c=profile');
                     
                 }else {
-                    $_SESSION['erreur'] = 'L\'adresse e-mail et/ou le mot de passe est incorrect';
+                    var_dump('eee');
+                    $_SESSION['message'] = 'L\'adresse e-mail et/ou le mot de passe est incorrect';
                     //header('location:?c=login');
                     exit;
                 }
 
-                $_SESSION['message'] = "Votre compte a ete cree avec succes !";
-                header('Location: ?c=profile');        
+                    
+                
+                    
+                    if(($user->getStatus()) == ROLE_ADMIN){
+                        $_SESSION['message'] = "Vous etes connectes !";
+                        header('Location:?c=admin');  
+                    }else{    
 
-            
-
+                        $_SESSION['message'] = "Vous etes connectes !";
+                        header('Location:?c=profile');  
+                    }
             
         }    
         
@@ -94,7 +104,7 @@ class UserController extends CoreController{
 
             if ($errors) {
                 $_SESSION['errors'][] = $errors;
-                header('location:/register');
+                header('location:?c=register');
                 exit;
             }    
             
@@ -122,21 +132,31 @@ class UserController extends CoreController{
 
 
     public function profile(){
+
+        // // $first_name = $_GET['first_name'];
+        // // $last_name = $_GET['last_name'];
+        // $email = $GET['email'];
+        // $password = $GET['password'];
+        
+        //$user = new User($id, $first_name, $last_name, $email, $password, $status);
+
+        
         $user = unserialize($_SESSION['user']);
-        $postRepository = new PostRepository;
-        $posts = $postRepository->findAllByUser($user);
-        //var_dump($posts);
-        echo $this->twig->render('profile.html.twig', ['user'=>$user, 'posts'=>$posts] );
+        // $postRepository = new PostRepository;
+        // $posts = $postRepository->findAllByUser($user);
+        // var_dump($posts);
+        // die;
+        echo $this->twig->render('profile.html.twig', ['user'=>$user]); //'posts'=>$posts] );
 
     }
 
     public function logout(){
         //if($this->isConnected())???
         //var_dump('$this->logout');
-        if (isset($_POST['email']) ){
+        
             session_destroy();
-            header('Location:?c=post');
-        }
+            header('Location:?c=login');
+        
     }    
 
 }
