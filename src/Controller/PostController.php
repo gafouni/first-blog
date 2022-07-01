@@ -2,17 +2,20 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Forms\UpdateForm;
+use App\Forms\CommentForm;
 use App\Forms\NewPostForm;
 use App\Validation\Validator;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 
 
 class PostController extends CoreController{ 
     public function display_list(){
         $postRepository = new PostRepository;
         $posts = $postRepository->findAll();
-        
+
 
         echo $this->twig->render('postpage.html.twig', ['posts'=>$posts]);
         
@@ -23,8 +26,47 @@ class PostController extends CoreController{
         $post = $postRepository->find($id);
         
 
-        echo $this->twig->render('showpage.html.twig', ['post'=>$post]);
+        //Partie commentaires/////////////////////////////////////////////////////////////////
         
+        
+        //$form = new CommentForm;
+    
+        //Traitement du formulaire
+        //Affichage de la liste des commentaires d'un article
+        $commentRepository = new CommentRepository;
+        $comments= $commentRepository->findAllByPost($post);
+        //$comments= $commentRepository->findAll();
+        
+        //var_dump($comments);
+
+        //Creation d'un nouveau commentaire
+
+        $content = $_POST['content'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $post = $_POST['post'];
+
+        $commentRepository = new CommentRepository;
+        $comment = new Comment(null, null, $content, $name, $email, null, $this->getPost());
+
+        // $comment->setContent($content)
+        //         ->setName($name)
+        //         ->setEmail($email)
+        //         ->setPost($post);
+
+        $commentRepository->create($comment);
+
+        
+        $form = new CommentForm;
+
+        echo $this->twig->render('showpage.html.twig', [
+            'post'=>$post,
+            'comments'=>$comments,
+            'commentForm' => $form->commentForm()->createForm()
+        ]);
+        
+        
+
     }
     
     public function addNewPost(){
@@ -58,7 +100,7 @@ class PostController extends CoreController{
                 $content = strip_tags($_POST['content']);
                 $user = strip_tags($_POST['user']);
 
-                // On hydrate l'utilisateur et on le stocke en base de donnees
+                //On hydrate l'utilisateur et on le stocke en base de donnees
                 $postRepository = new PostRepository;
 
                 
