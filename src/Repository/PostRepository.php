@@ -41,7 +41,7 @@ class PostRepository extends CoreRepository{
     public function findAllByUser($user): array{
         $posts=[];
         $pdo_st=$this->pdo->prepare('select * from post where user_id = :user_id order by `date` desc');
-        $pdo_st->bindValue('user_id', $user->getId());
+        $pdo_st->bindValue(':user_id', $user->getId());
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
 
