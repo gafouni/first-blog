@@ -23,7 +23,7 @@ class CoreController
 
    public function isAdmin(){
       
-      return(!empty($this->getConnectedUser()->getStatus()) == 'ROLE_ADMIN');
+      return(($this->getConnectedUser()->getStatus()) == 'ROLE_ADMIN');
    }
    
 }
