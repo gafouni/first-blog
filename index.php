@@ -46,6 +46,12 @@
          $controller->profile();
          break;    
 
+      case 'logout':
+         $controller=new UserController;
+         $controller->logout();
+         break;    
+
+
       case 'newPost':
          $controller=new PostController;
          $controller->addNewPost();
@@ -61,7 +67,7 @@
          $controller->deletePost($id);
          break;     
 
-      case 'admin':
+      case 'admin':   
          $controller=new AdminController;
          $controller->allPosts();
          break;   

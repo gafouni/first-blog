@@ -45,7 +45,7 @@ class PostController extends CoreController{
             //die;
             
             if ($errors) {
-                //var_dump('bbb');
+                var_dump('bbb');
                 $_SESSION['errors'][] = $errors;
                 header('location:?c=newPost');
                 exit;
@@ -96,7 +96,7 @@ class PostController extends CoreController{
             }
 
             //On verifie si l'utilisateur est proprietaire de l'article
-            if($post->getUser()->getId() !== $this->getConnectedUser()->getId()){
+            if($post->getUser()->getId() !== $this->getConnectedUser()->getId() && !$this->isAdmin()){
                 $_SESSION['erreur'] = "Vous n'avez pas acces a cette page";
                 header('Location:?c=post');
                 exit;
@@ -138,8 +138,16 @@ class PostController extends CoreController{
 
                 $postRepository->update($post);
 
-                $_SESSION['message'] = "votre article a ete modifie avec succes!";
-                header('Location: ?c=profile');
+                if($this->isAdmin()){
+                    $_SESSION['message'] = "Votre article a ete modifie !";
+                    header('Location:?c=admin');  
+                }else{    
+
+                    $_SESSION['message'] = "Votre article a ete modifie !";
+                    header('Location:?c=profile');  
+                }
+                //$_SESSION['message'] = "votre article a ete modifie avec succes!";
+                //header('Location: ?c=profile');
 
         }
 
@@ -160,7 +168,7 @@ class PostController extends CoreController{
 
             //On verifie si le produit existe
             if(!$post){
-                $_SESSION['erreur'] = "L'article recherche n'existe pas";
+                $_SESSION['message'] = "L'article recherche n'existe pas";
                 header('Location:?c=profile');
             }    
 
