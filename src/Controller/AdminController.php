@@ -32,6 +32,14 @@ class AdminController extends CoreController{
         header('Location:?c=admin');
         
     }
+
+    public function readComment(){
         
 
+    }
+        
+    public function readMessage(){
+
+
+    }
 }

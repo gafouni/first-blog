@@ -14,7 +14,7 @@ class Comment {
 
     public function __construct($id, $date, $content, $name, $email, $active, $post){
         $this->id = $id;
-        $this->date = $date;
+        $this->date = $date ?? date('Y-m-d');
         $this->content = $content;
         $this->name = $name;
         $this->email = $email;
