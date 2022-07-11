@@ -13,7 +13,10 @@ class CommentForm extends Form{
             // ->addLabelFor('date', 'Date de creation :')
             // ->addInput('text', 'date', ['id' => 'date', 'class' =>'form-control'])
             ->addLabelFor('name', 'Pseudo :')
+
             ->addInput('text', 'name', ['id' => 'name', 'class' =>'form-control'])
+
+      
             ->addLabelFor('email', 'E-mail :')
             ->addInput('email', 'email', ['id' => 'email', 'class' =>'form-control'])
             ->addLabelFor('contenu', 'Contenu :')

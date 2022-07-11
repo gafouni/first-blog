@@ -58,11 +58,15 @@ class CommentRepository extends CoreRepository{
 
     public function findAllByPost($post): array{
         $comments=[];
+
         $pdo_st=$this->pdo->prepare('select * from `comment` where id_post = :post_id AND active = 1 order by `date` desc');
         $pdo_st->bindValue(':post_id', $post->getId());
         $pdo_st->execute();
         $commentsData=$pdo_st->fetchAll();
         
+
+
+
         $postRepository = new PostRepository();
         
         foreach($commentsData as $commentData){
@@ -81,7 +85,10 @@ class CommentRepository extends CoreRepository{
     }
 
     public function create(Comment $comment){
+
         $pdo_st=$this->pdo->prepare("INSERT INTO `comment` (`date`, `content`, `name`, `email`, `id_post`) VALUES (now(), :content, :name, :email, :post)");
+
+       
         $pdo_st->bindValue(':content',$comment->getContent());
         $pdo_st->bindValue(':name',$comment->getname());
         $pdo_st->bindValue(':email',$comment->getemail());
