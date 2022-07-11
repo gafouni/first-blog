@@ -28,14 +28,19 @@ class PostController extends CoreController{
         $post = $postRepository->find($id);
         
 
+ 
         //Partie commentaires////////////////////////////////////
         
         //Affichage de la liste des commentaires d'un article
         $commentRepository = new CommentRepository;
+
+        
+
         
         //var_dump($comments);
 
         //Creation d'un nouveau commentaire
+
         if(!empty($_POST['content'])){
             $content = $_POST['content'];
             $name = $_POST['name'];
@@ -53,12 +58,19 @@ class PostController extends CoreController{
         $form = new CommentForm;
 
         
+
+
+        
+
+
         echo $this->twig->render('showpage.html.twig', [
             'post'=>$post,
             'comments'=>$comments,
             'commentForm' => $form->commentForm()->createForm()
         ]);
         
+        
+
     }
 
     
