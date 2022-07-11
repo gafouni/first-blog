@@ -21,43 +21,47 @@ class PostController extends CoreController{
         
     }
 
+
+
     public function show($id){
         $postRepository = new PostRepository;
         $post = $postRepository->find($id);
         
 
-        //Partie commentaires/////////////////////////////////////////////////////////////////
+ 
+        //Partie commentaires////////////////////////////////////
         
-        
-        //$form = new CommentForm;
-    
-        //Traitement du formulaire
         //Affichage de la liste des commentaires d'un article
         $commentRepository = new CommentRepository;
-        $comments= $commentRepository->findAllByPost($post);
-        //$comments= $commentRepository->findAll();
+
+        
+
         
         //var_dump($comments);
 
         //Creation d'un nouveau commentaire
 
-        $content = $_POST['content'];
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $post = $_POST['post'];
-
-        $commentRepository = new CommentRepository;
-        $comment = new Comment(null, null, $content, $name, $email, null, $this->getPost());
-
-        // $comment->setContent($content)
-        //         ->setName($name)
-        //         ->setEmail($email)
-        //         ->setPost($post);
+        if(!empty($_POST['content'])){
+            $content = $_POST['content'];
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+                  
+            $comment = new Comment(null, null, $content, $name, $email, null, $post);   
 
         $commentRepository->create($comment);
+        }
+
+        //On recupere la liste des commentaires publies
+        $comments= $commentRepository->findAllByPost($post);
+        
+        //Affichage: article et commentaires
+        $form = new CommentForm;
 
         
-        $form = new CommentForm;
+
+
+        
+
 
         echo $this->twig->render('showpage.html.twig', [
             'post'=>$post,
@@ -68,6 +72,7 @@ class PostController extends CoreController{
         
 
     }
+
     
     public function addNewPost(){
         //On verifie si l'utilisateur est connecte

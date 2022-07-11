@@ -27,8 +27,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=admin">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Commentaires</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Messages</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=readComment">Commentaires</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=readMessage">Messages</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=logout">Deconnexion</a></li>
                 </ul>
                 
@@ -64,6 +64,40 @@
                     <td>{{post.date|date("d/m/Y")}}</td>
                     <td>
                         <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Modifier</a>
+                        <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div> 
+        <div class="col-md-2 col-lg">
+        </div><br><br><br>
+
+    <h3>Liste des articles proposes par les membres</h3><br>
+
+    <div class="row justify-content-center"> 
+        <div class="col-md-2 col-lg">
+        </div>    
+        <div class="col-md-8 col-lg-12"> 
+
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Publie le</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}    
+                    <tr>
+                    <th scope="row">{{post.id}}</th>
+                    <td>{{post.title}}</td>
+                    <td>{{post.date|date("d/m/Y")}}</td>
+                    <td>
+                        <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Publier</a>
                         <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
                     </td>
                     </tr>

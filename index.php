@@ -28,8 +28,7 @@
         else {
             echo 'Erreur : aucun identifiant de billet envoyé';
         }
-         break;   
-
+      break;   
 
       case 'login':
          $controller=new UserController;
@@ -72,30 +71,26 @@
          $controller->allPosts();
          break;   
 
+      // case 'readPost':
+      //    $controller=new AdminController;
+      //    $controller->readPost();
+      //    break;      
+
+      case 'comment':
+         $controller=new AdminController;
+         $controller->readcomment();
+         break;     
+
+      case 'message':
+         $controller=new AdminController;
+         $controller->readMessage();
+         break;            
+
       default: 
          $controller=new HomepageController;
          $controller->display();  
    }
    
 
-// require('controller.php');
-
-// if (isset($_GET['c'])) {
-//     if ($_GET['action'] == 'listPosts') {
-//         listPosts();
-//     }
-//     elseif ($_GET['action'] == 'post') {
-//         if (isset($_GET['id']) && $_GET['id'] > 0) {
-//             post();
-//         }
-//         else {
-//             echo 'Erreur : aucun identifiant de billet envoyé';
-//         }
-//     }
-// }
-// else {
-//     listPosts();
-// }
- 
 
 

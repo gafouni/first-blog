@@ -40,7 +40,10 @@ class PostRepository extends CoreRepository{
 
     public function findAllByUser($user): array{
         $posts=[];
-        $pdo_st=$this->pdo->prepare('select * from post where user_id = :user_id order by `date` desc');
+
+        $pdo_st=$this->pdo->prepare('select * from post where id_user= :user_id order by `date` desc');
+
+
         $pdo_st->bindValue(':user_id', $user->getId());
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
@@ -55,7 +58,7 @@ class PostRepository extends CoreRepository{
     }
 
     public function create( Post $post){
-        $pdo_st=$this->pdo->prepare("INSERT INTO `post` (`title`, `author`, `date`, `content`, `published`, `user`) VALUES (:title, :author, :date, :content, now(), :user)");
+        $pdo_st=$this->pdo->prepare("INSERT INTO `post` (`title`, `author`, `date`, `content`, `published`, `id_user`) VALUES (:title, :author, :date, :content, now(), :user)");
         $pdo_st->bindValue(':title',$post->getTitle());
         $pdo_st->bindValue(':author',$post->getAuthor());
         $pdo_st->bindValue(':date',$post->getDate());

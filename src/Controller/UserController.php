@@ -51,10 +51,10 @@ class UserController extends CoreController{
                 if (password_verify($_POST['password'], $user->getPassword())){  
                     //var_dump('dddd');
                     $userRepository->setSession($user);
-                   // header('Location:?c=profile');
+                    header('Location:?c=profile');
                     
                 }else {
-                    var_dump('eee');
+                    //var_dump('eee');
                     $_SESSION['message'] = 'L\'adresse e-mail et/ou le mot de passe est incorrect';
                     //header('location:?c=login');
                     exit;
@@ -133,20 +133,26 @@ class UserController extends CoreController{
 
     public function profile(){
 
-        // // $first_name = $_GET['first_name'];
-        // // $last_name = $_GET['last_name'];
-        // $email = $GET['email'];
-        // $password = $GET['password'];
         
-        //$user = new User($id, $first_name, $last_name, $email, $password, $status);
+        // if(!empty($_POST['first_name'])){
 
-        
+        //     $id = $_GET['id'];
+        //     $first_name = $_GET['first_name'];
+        //     $last_name = $_GET['last_name'];
+        //     $email = $_GET['email'];
+        //     $password = $_GET['password'];
+        //     $status = $_GET['status'];
+            
+        //     $user = new User($id, $first_name, $last_name, $email, $password, $status);
+        // }    
+
+        //On recupere la liste des articles proposes par le membre        
         $user = unserialize($_SESSION['user']);
         // $postRepository = new PostRepository;
         // $posts = $postRepository->findAllByUser($user);
-        // var_dump($posts);
-        // die;
-        echo $this->twig->render('profile.html.twig', ['user'=>$user]); //'posts'=>$posts] );
+        //var_dump($posts);
+        //die;
+        echo $this->twig->render('profile.html.twig', ['user'=>$user]); //['posts'=>$posts] );
 
     }
 
