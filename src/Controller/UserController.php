@@ -136,23 +136,15 @@ class UserController extends CoreController{
         
         // if(!empty($_POST['first_name'])){
 
-        //     $id = $_GET['id'];
-        //     $first_name = $_GET['first_name'];
-        //     $last_name = $_GET['last_name'];
-        //     $email = $_GET['email'];
-        //     $password = $_GET['password'];
-        //     $status = $_GET['status'];
-            
-        //     $user = new User($id, $first_name, $last_name, $email, $password, $status);
-        // }    
+        
 
         //On recupere la liste des articles proposes par le membre        
-        $user = unserialize($_SESSION['user']);
-        // $postRepository = new PostRepository;
-        // $posts = $postRepository->findAllByUser($user);
+        $user = $this->getConnectedUser();
+        $postRepository = new PostRepository;
+        $posts = $postRepository->findAllByUser($user);
         //var_dump($posts);
         //die;
-        echo $this->twig->render('profile.html.twig', ['user'=>$user]); //['posts'=>$posts] );
+        echo $this->twig->render('profile.html.twig', ['user'=>$user, 'posts'=>$posts] );
 
     }
 
