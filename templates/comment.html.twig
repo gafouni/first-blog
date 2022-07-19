@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+{% block title %}Gafouni-first-blog{% endblock %}
+
+{% block content %}
+
+<!-- Page Header-->
+<header class="masthead">
+    <!-- <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Haoua Abouna</h1>
+                    <span class="subheading">Developpeuse web PHP/Symfony</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</header> 
+<body>
+    {# <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:grey">
+        <div class="container px-4 px-lg-5">
+            
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=admin">Articles</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=comment">Commentaires</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=message">Messages</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=logout">Deconnexion</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav> #}
+
+    <h2>Commentaires en attente de moderation</h2><br>
+
+    {# <a class="btn btn-primary" href="?c=newPost" >Creer un article</a><br><br>
+
+    <h3>Liste des articles publies</h3><br> #}
+
+    <div class="row justify-content-center"> 
+        <div class="col-md-2 col-lg">
+        </div>
+        <div class="col-md-8 col-lg-12"> 
+
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Commentaire</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}    
+                        <tr>
+                        <th scope="row">{{comment.id}}</th>
+                        <td>{{comment.name}}</td>
+                        <td>{{comment.email}}</td>
+                        <td>{{comment.content}}</td>
+                        {# <td>{{post.date|date("d/m/Y")}}</td> #}
+                        <td>
+                            <a href="?c=activateComment&id={{comment.id}}" class="btn btn-warning btn-sm">Publier</a>
+                            <a href="?c=deleteComment&id={{comment.id}}" class="btn btn-secondary btn-sm">Supprimer</a>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> 
+    </div>
+
+</body>      
+
+{% endblock %}
+

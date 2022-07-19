@@ -27,8 +27,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=admin">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=readComment">Commentaires</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=readMessage">Messages</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=comment">Commentaires</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=message">Messages</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=logout">Deconnexion</a></li>
                 </ul>
                 
@@ -98,7 +98,7 @@
                     <td>{{post.date|date("d/m/Y")}}</td>
                     <td>
                         <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Publier</a>
-                        <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
+                        <a href="?c=deletePost&id={{post.id}}" class="btn btn-secondary btn-sm">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}

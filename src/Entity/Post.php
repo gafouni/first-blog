@@ -7,16 +7,18 @@ class Post{
     private string $author;
     private string $title;
     private string $content;
+    private ?string $active;
     private ?string $published;
     private User $user;
 
 
-    public function __construct($id, $title, $author, $date, $content, $published, $user){
+    public function __construct($id, $title, $author, $date, $content, $active, $published, $user){
       $this->id = $id;
       $this->title = $title;
       $this->date = $date;
       $this->author = $author;
       $this->content = $content;
+      $this->active = $active;
       $this->published = $published;
       $this->user = $user;
     }
@@ -60,6 +62,14 @@ class Post{
     public function getContent()
     {
       return $this->content;
+    }
+    public function setActive($active)
+    {
+      $this->active = $active;
+    }
+    public function getActive()
+    {
+      return $this->active;
     }
     public function setPublished($published)
     {

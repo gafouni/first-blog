@@ -74,9 +74,10 @@ class UserController extends CoreController{
             
         }    
         
+        $message = $_SESSION['message'] ?? NULL;
         $form = new LoginForm;
 
-        echo $this->twig->render('login.html.twig', ['loginForm' => $form->loginForm()->createForm()]);
+        echo $this->twig->render('login.html.twig', ['loginForm' => $form->loginForm()->createForm(), 'message'=>$message]);
 
         
     
@@ -133,24 +134,19 @@ class UserController extends CoreController{
 
     public function profile(){
 
-        
-        // if(!empty($_POST['first_name'])){
-
-        
-
         //On recupere la liste des articles proposes par le membre        
         $user = $this->getConnectedUser();
         $postRepository = new PostRepository;
         $posts = $postRepository->findAllByUser($user);
         //var_dump($posts);
         //die;
-        echo $this->twig->render('profile.html.twig', ['user'=>$user, 'posts'=>$posts] );
+        $message = $_SESSION['message'] ?? NULL;
+
+        echo $this->twig->render('profile.html.twig', ['user'=>$user, 'posts'=>$posts, 'message'=>$message] );
 
     }
 
     public function logout(){
-        //if($this->isConnected())???
-        //var_dump('$this->logout');
         
             session_destroy();
             header('Location:?c=login');

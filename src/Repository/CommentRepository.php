@@ -33,9 +33,10 @@ class CommentRepository extends CoreRepository{
         return $comment;
     }
 
-    public function findAll(): array{
+    public function findAll($active =1): array{
         $comments=[];
-        $pdo_st=$this->pdo->prepare('select * from `comment` order by `date` desc');
+        $pdo_st=$this->pdo->prepare('select * from `comment` WHERE active = :active order by `date` desc');
+        $pdo_st->bindValue(':active', $active);
         $pdo_st->execute();
         $commentsData=$pdo_st->fetchAll();
 
@@ -56,6 +57,8 @@ class CommentRepository extends CoreRepository{
         return $comments;
     }
 
+    
+
     public function findAllByPost($post): array{
         $comments=[];
 
@@ -64,9 +67,6 @@ class CommentRepository extends CoreRepository{
         $pdo_st->execute();
         $commentsData=$pdo_st->fetchAll();
         
-
-
-
         $postRepository = new PostRepository();
         
         foreach($commentsData as $commentData){
@@ -84,6 +84,10 @@ class CommentRepository extends CoreRepository{
         return $comments;
     }
 
+    
+    
+    
+
     public function create(Comment $comment){
 
         $pdo_st=$this->pdo->prepare("INSERT INTO `comment` (`date`, `content`, `name`, `email`, `id_post`) VALUES (now(), :content, :name, :email, :post)");
@@ -96,6 +100,15 @@ class CommentRepository extends CoreRepository{
         $pdo_st->execute();   
     
     }    
+
+    public function activate(Comment $comment){
+        $pdo_st=$this->pdo->prepare("UPDATE `comment` SET `active`= '1'  WHERE `id`=:id");
+        $pdo_st->bindValue(':id',$comment->getId());
+        
+        $pdo_st->execute(); 
+
+    }
+
 
     public function delete(Comment $comment){
         $pdo_st=$this->pdo->prepare('DELETE from `comment` where `id`=:id');

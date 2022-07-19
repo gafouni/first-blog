@@ -70,6 +70,12 @@
                 <div class="my-5">
 
                 {{ commentForm|raw }}
+
+                {% if message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %} 
                 </div>    
             </div>
         </div>
