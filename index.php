@@ -62,7 +62,7 @@
          break;  
 
       case 'activatePost':
-         $controller=new PostController;
+         $controller=new AdminController;
          $controller->activatePost($id);
          break;   
 

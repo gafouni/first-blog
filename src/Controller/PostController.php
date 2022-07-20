@@ -110,7 +110,7 @@ class PostController extends CoreController{
                 $post = new Post(null, $title, $author, $date, $content, null, null, $this->getConnectedUser());
                 $postRepository->create($post);
                 
-                $_SESSION['message'] = "votre article a ete cree avec succes!";
+                $_SESSION['message'] = "votre article a ete enregistre, il sera publie tres bientot";
                 header('Location: ?c=profile');
             
         }
@@ -203,11 +203,7 @@ class PostController extends CoreController{
    
     }
 
-    public function activatePost(int $id){
-
-
-    }
-
+    
     public function delete(int $id){
         if($this->isConnected() && !empty($_POST['title'])){
 

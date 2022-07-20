@@ -12,20 +12,20 @@ class PostRepository extends CoreRepository{
         
         if (empty($postData)){
             return null;
-
         }
 
         $userRepository = new UserRepository();
 
-
         $post = new Post($postData['id'], $postData['title'], $postData['author'], $postData['date'], $postData['content'], $postData['active'], $postData['published'], $userRepository->find($postData['id_user']));
-    
         return $post;
     }
 
-    public function findAll(): array{
+    
+
+    public function findAll($active = 1): array{
         $posts=[];
-        $pdo_st=$this->pdo->prepare('select * from post order by `date` desc');
+        $pdo_st=$this->pdo->prepare('select * from post WHERE active = :active order by `date` desc');
+        $pdo_st->bindValue(':active', $active);
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
 
@@ -38,12 +38,10 @@ class PostRepository extends CoreRepository{
         return $posts;
     }
 
-    public function findAllByUser($user): array{
+    public function findAllByUser($user, $active=0): array{
         $posts=[];
-
-        $pdo_st=$this->pdo->prepare('select * from post where id_user= :user_id AND active = 0 order by `date` desc');
-
-
+        $pdo_st=$this->pdo->prepare('select * from post where id_user= :user_id AND active = :active order by `date` desc');
+        $pdo_st->bindValue(':active', $active);
         $pdo_st->bindValue(':user_id', $user->getId());
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
@@ -56,10 +54,15 @@ class PostRepository extends CoreRepository{
     
         return $posts;
     }
-    public function findAllByMembers(): array{
+
+    
+
+
+
+    public function findAllByMembers($active =1): array{
         $posts=[];
-        $pdo_st=$this->pdo->prepare('select p.* from post p inner join `user` u on p.id_user=u.id where u.status is NULL AND active = 0 order by p.`date` desc');
-        //$pdo_st->bindValue(':user_id', $user->getId());
+        $pdo_st=$this->pdo->prepare('select * from post p inner join `user` u on p.id_user=u.id where u.status is NULL AND active = :active order by p.`date` desc');
+        $pdo_st->bindValue(':active', $active);
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
 
@@ -97,7 +100,7 @@ class PostRepository extends CoreRepository{
 
     public function activatePost(Post $post){
         $pdo_st=$this->pdo->prepare("UPDATE `post` SET `active`= '1',  WHERE `id`=:id");
-        $pdo_st->bindValue(':id',$comment->getId());
+        $pdo_st->bindValue(':id',$post->getId());
         
         $pdo_st->execute(); 
 

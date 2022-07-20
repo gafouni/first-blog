@@ -13,9 +13,9 @@ class AdminController extends CoreController{
         if($this->isAdmin()){
             $postRepository = new PostRepository;
             $user = $this->getConnectedUser();
-            $posts = $postRepository->findAllByUser($user);
+            $posts = $postRepository->findAllByUser($user, $active=0);
 
-            $membersPosts = $postRepository->findAllByMembers();
+            $membersPosts = $postRepository->findAllByMembers(0);
 
         }else{
             $_SESSION['message']="Vous n'avez pas acces a cette page";
@@ -27,6 +27,18 @@ class AdminController extends CoreController{
           //var_dump($membersPosts);
 
     }
+
+    public function activatePost(int $id){
+        $postRepository = new PostRepository;
+        $post = $postRepository->find($id);
+        
+        
+        $postRepository->activatePost($post);
+        //var_dump('$post');
+        header('Location:?c=admin'); 
+
+    }
+
 
     public function deletePost(int $id){
 
@@ -42,14 +54,10 @@ class AdminController extends CoreController{
     }
 
     public function displayComments(){
-        
-        //if(!empty($_POST['content'])){
-           
+               
             $commentRepository = new CommentRepository;
             $comments = $commentRepository->findAll(0);
-            //var_dump($comments);
-            //die;
-        //}        
+          
         echo $this->twig->render('comment.html.twig', ['comments'=>$comments]);
         //var_dump($comments);
         
@@ -62,20 +70,10 @@ class AdminController extends CoreController{
         $commentRepository = new CommentRepository;
         $comment = $commentRepository->find($id);
 
-        //$comment->setActive(true);
+        $commentRepository->activate($comment);
 
-        //var_dump($comment);
-        
-        
+        header('Location: ?c=comment');       
             
-           
-
-            //$comment = new Comment(null, null, $content, $name, $email, null, $post);
-         $commentRepository->activate($comment);
-
-         header('Location: ?c=comment');       
-            //echo $this->twig->render('comment.html.twig', ['comment'=>$comment]);
-            //var_dump($comment);
          
     }
 
@@ -93,8 +91,41 @@ class AdminController extends CoreController{
     }
         
 
-    public function readMessage(){
+    public function displayMessage(){
 
+        $messageRepository = new MessageRepository;
+        $messages = $messageRepository->findAll();
+          
+        echo $this->twig->render('admin.html.twig', ['messages'=>$messages]);
 
     }
+
+    public function AddMessage(){
+        
+        if(!empty($_POST['content'])){
+            
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $subject = $_POST['subject'];
+            $content = $_POST['content'];
+                  
+            $message = new Message(null, $name, $email, null, $subject, $content);   
+        
+        $messageRepository = new MessageRepository;    
+        $messageRepository->create($message);
+        
+        $_SESSION['message'] = "votre message a ete enregistre, vous recevrez une reponse tres bientot";
+        header('Location: ?c=default');
+        }
+
+        $form = new MessageForm;
+
+        echo $this->twig->render('homepage.html.twig', ['messageForm' => $form->messageForm()->createForm()]);
+        
+    }
+
+
+
+
+
 }

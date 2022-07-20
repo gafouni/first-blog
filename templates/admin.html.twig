@@ -63,6 +63,7 @@
                     <td>{{post.title}}</td>
                     <td>{{post.date|date("d/m/Y")}}</td>
                     <td>
+                        <a href="?c=activatePost&id={{post.id}}" class="btn btn-secondary btn-sm">Publier</a>
                         <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Modifier</a>
                         <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
                     </td>
@@ -97,7 +98,7 @@
                     <td>{{post.title}}</td>
                     <td>{{post.date|date("d/m/Y")}}</td>
                     <td>
-                        <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Publier</a>
+                        <a href="?c=activatePost&id={{post.id}}" class="btn btn-warning btn-sm">Publier</a>
                         <a href="?c=deletePost&id={{post.id}}" class="btn btn-secondary btn-sm">Supprimer</a>
                     </td>
                     </tr>

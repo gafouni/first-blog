@@ -137,7 +137,7 @@ class UserController extends CoreController{
         //On recupere la liste des articles proposes par le membre        
         $user = $this->getConnectedUser();
         $postRepository = new PostRepository;
-        $posts = $postRepository->findAllByUser($user);
+        $posts = $postRepository->findAllByUser($user, $active=1);
         //var_dump($posts);
         //die;
         $message = $_SESSION['message'] ?? NULL;
