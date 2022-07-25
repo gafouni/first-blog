@@ -62,10 +62,10 @@ class PostRepository extends CoreRepository{
     public function findAllByMembers($active =1): array{
         $posts=[];
         $pdo_st=$this->pdo->prepare('select * from post p inner join `user` u on p.id_user=u.id where u.status is NULL AND active = :active order by p.`date` desc');
-        $pdo_st->bindValue(':active', $active);
+        $pdo_st->bindValue('active', (int) $active);
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
-
+        var_dump($active);
         $userRepository = new UserRepository();
         
         foreach($postsData as $postData){
@@ -76,10 +76,11 @@ class PostRepository extends CoreRepository{
     }
 
     public function create( Post $post){
-        $pdo_st=$this->pdo->prepare("INSERT INTO `post` (`title`, `author`, `date`, `content`, `published`, `id_user`) VALUES (:title, :author, :date, :content, now(), :user)");
+        $pdo_st=$this->pdo->prepare("INSERT INTO `post` (`title`, `author`, `date`, `content`, `active`, `published`, `id_user`) VALUES (:title, :author, :date, :content, :active, now(), :user)");
         $pdo_st->bindValue(':title',$post->getTitle());
         $pdo_st->bindValue(':author',$post->getAuthor());
         $pdo_st->bindValue(':date',$post->getDate());
+        $pdo_st->bindValue(':active',$post->getActive());
         $pdo_st->bindValue(':content',$post->getContent());
         $pdo_st->bindValue(':user',$post->getUser()->getId());
         $pdo_st->execute();   

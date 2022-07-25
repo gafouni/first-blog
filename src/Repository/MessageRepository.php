@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Message;
+
 Class MessageRepository extends CoreRepository{
 
     public function find(Int $id): ?Message{
@@ -15,9 +17,7 @@ Class MessageRepository extends CoreRepository{
             return null;
         }
 
-        $userRepository = new UserRepository();
-
-        $message = new Message($postData['id'], $postData['name'], $postData['email'], $postData['date'], $postData['subject'], $postData['content'], $userRepository->find($postData['id_user']));
+        $message = new Message($postData['id'], $postData['name'], $postData['email'], $postData['date'], $postData['subject'], $postData['content']);
         
         return $message;
 
@@ -31,10 +31,9 @@ Class MessageRepository extends CoreRepository{
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
 
-        $userRepository = new UserRepository();
         
         foreach($postsData as $postData){
-            $messages[]= new Message($postData['id'], $postData['name'], $postData['email'], $postData['date'], $postData['subject'], $postData['content'], $userRepository->find($postData['id_user']));
+            $messages[]= new Message($postData['id'], $postData['name'], $postData['email'], $postData['date'], $postData['subject'], $postData['content']);
         }
 
         return $messages;
@@ -42,20 +41,20 @@ Class MessageRepository extends CoreRepository{
 
 
     public function create( Message $message){
-        $pdo_st=$this->pdo->prepare("INSERT INTO `message` (`name`, `email`, `date`, `subject`, `content`) VALUES (:name, :email, :now(), :subject, :content, :user)");
+        $pdo_st=$this->pdo->prepare("INSERT INTO `message` (`name`, `email`, `date`, `subject`, `content`) VALUES (:name, :email, now(), :subject, :content)");
         $pdo_st->bindValue(':name',$message->getName());
         $pdo_st->bindValue(':email',$message->getEmail());
         $pdo_st->bindValue(':subject',$message->getSubject());
         $pdo_st->bindValue(':content',$message->getContent());
-        $pdo_st->bindValue(':user',$message->getUser()->getId());
+        //$pdo_st->bindValue(':user',$message->getUser()->getId());
         $pdo_st->execute();   
     
     }    
 
 
-    public function delete(){
+    public function delete(Message $message){
         $pdo_st=$this->pdo->prepare('DELETE from `message` where `id`=:id');
-        $pdo_st->bindValue(':id',$message->getId());
+        $pdo_st->bindValue(':id', $message->getId());
         $pdo_st->execute();
 
     }

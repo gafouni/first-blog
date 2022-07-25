@@ -107,7 +107,7 @@ class PostController extends CoreController{
                 $postRepository = new PostRepository;
 
                 
-                $post = new Post(null, $title, $author, $date, $content, null, null, $this->getConnectedUser());
+                $post = new Post(null, $title, $author, $date, $content, 0, 0, $this->getConnectedUser());
                 $postRepository->create($post);
                 
                 $_SESSION['message'] = "votre article a ete enregistre, il sera publie tres bientot";

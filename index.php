@@ -93,8 +93,13 @@
 
       case 'message':
          $controller=new AdminController;
-         $controller->readMessage();
+         $controller->displayMessage();
          break;            
+
+      case 'deleteMessage':
+         $controller = new AdminController;
+         $controller->deleteMessage($id); 
+         break;  
 
       default: 
          $controller=new HomepageController;

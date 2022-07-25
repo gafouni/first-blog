@@ -4,10 +4,10 @@ namespace App\Entity;
 
 class Message{
 
-    private int $id;
+    private ?int $id;
     private string $name;
     private string $email;
-    private string $date;
+    private ?string $date;
     private string $subject;
     private string $content;
 
@@ -15,7 +15,7 @@ class Message{
     {
         $this->id = $id;
         $this->name = $name;
-        $this->name = $email;
+        $this->email = $email;
         $this->date = $date;
         $this->subject = $subject;
         $this->content = $content;

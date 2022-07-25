@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Controller\CoreController;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
+use App\Repository\MessageRepository;
 
 class AdminController extends CoreController{
 
@@ -13,10 +14,10 @@ class AdminController extends CoreController{
         if($this->isAdmin()){
             $postRepository = new PostRepository;
             $user = $this->getConnectedUser();
-            $posts = $postRepository->findAllByUser($user, $active=0);
+            $posts = $postRepository->findAllByUser($user, 0);
 
             $membersPosts = $postRepository->findAllByMembers(0);
-
+            var_dump($membersPosts);
         }else{
             $_SESSION['message']="Vous n'avez pas acces a cette page";
             header('Location:?c=profile');
@@ -96,31 +97,20 @@ class AdminController extends CoreController{
         $messageRepository = new MessageRepository;
         $messages = $messageRepository->findAll();
           
-        echo $this->twig->render('admin.html.twig', ['messages'=>$messages]);
+        echo $this->twig->render('message.html.twig', ['messages'=>$messages]);
 
     }
 
-    public function AddMessage(){
-        
-        if(!empty($_POST['content'])){
-            
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $subject = $_POST['subject'];
-            $content = $_POST['content'];
-                  
-            $message = new Message(null, $name, $email, null, $subject, $content);   
-        
-        $messageRepository = new MessageRepository;    
-        $messageRepository->create($message);
-        
-        $_SESSION['message'] = "votre message a ete enregistre, vous recevrez une reponse tres bientot";
-        header('Location: ?c=default');
-        }
+    public function deleteMessage(int $id){
 
-        $form = new MessageForm;
+        $messageRepository = new MessageRepository;
+        $message = $messageRepository->find($id);
+        
+        //$commentRepository = new CommentRepository;
+        $messageRepository->delete($message);
 
-        echo $this->twig->render('homepage.html.twig', ['messageForm' => $form->messageForm()->createForm()]);
+        $_SESSION['message'] = "Le message a ete bien supprime";
+        header('Location:?c=message');
         
     }
 
