@@ -65,7 +65,7 @@ class PostRepository extends CoreRepository{
         $pdo_st->bindValue('active', (int) $active);
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
-        var_dump($active);
+        //var_dump($active);
         $userRepository = new UserRepository();
         
         foreach($postsData as $postData){

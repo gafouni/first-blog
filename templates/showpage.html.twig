@@ -21,7 +21,7 @@
 </header>
 
 <div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="row gx-4 gx-lg-5 justify-content-center bg-yellow">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="post-heading">
                 <h1>{{post.title}}</h1>
@@ -39,7 +39,7 @@
 <!-- Post Content-->
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="row gx-4 gx-lg-5 justify-content-center bg-yellow">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 {{ post.content }}
                     
@@ -47,7 +47,19 @@
         </div>
     </div>
 </article>
-<div class="container position-relative px-4 px-lg-5">
+<header class="masthead" style="background-image: url('assets/img/pexels-josh-sorenson-9469517.jpg');height: 150px; ">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center bg-yellow">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {# <div class="page-heading">
+                    <h2>Contactez-moi</h2>
+                    <span class="subheading">N'hesitez pas a poser toutes vos questions</span>
+                </div> #}
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container position-relative px-4 px-lg-5 bg-yellow">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
@@ -81,6 +93,17 @@
         </div>
     </div>
 </div>
-
+<header class="masthead" style="background-image: url('assets/img/post-bg.jpg');height: 150px; ">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center bg-yellow">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {# <div class="page-heading">
+                    <h2>Contactez-moi</h2>
+                    <span class="subheading">N'hesitez pas a poser toutes vos questions</span>
+                </div> #}
+            </div>
+        </div>
+    </div>
+</header>
 
 {% endblock %}
