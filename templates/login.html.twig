@@ -4,7 +4,7 @@
 
 
  <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+        <header class="masthead" style="background-image: url('assets/img/pexels-ryutaro-tsukata-6249220.jpg')">
             {# <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -17,15 +17,15 @@
             </div> #}
         </header>
         <!-- Main Content-->
-        <main class="mb-4">
+        <main class="mb-4 bg-yellow">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        {% if SESSION['message'] %}
+                        {% if message %}
                             <div class="alert alert-danger" role="alert">
                                 {{ message }}
                             </div>
-                        {% endif %}
+                        {% endif %} 
                         <h3>Heureux de vous revoir, connectez-vous!</h3>
                         <div class="my-5">
                         

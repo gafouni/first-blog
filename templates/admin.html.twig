@@ -4,8 +4,8 @@
 {% block content %}
 
 <!-- Page Header-->
-<header class="masthead">
-    <!-- <div class="container position-relative px-4 px-lg-5">
+<header class="masthead" style="background-image: url('assets/img/pexels-ready-made-3850236.jpg')">
+    {# <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
@@ -14,21 +14,21 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>  #}
 </header> 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:grey">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-image: url('assets/img/pexels-josh-sorenson-9469517.jpg')">
         <div class="container px-4 px-lg-5">
-            {# <a class="navbar-brand" href="index.html">Gafouni-first-blog</a>
+            <a class="navbar-brand" href="index.html">Gafouni-first-blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
-            </button> #}
+            </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=admin">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=readComment">Commentaires</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=readMessage">Messages</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=comment">Commentaires</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=message">Messages</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="?c=logout">Deconnexion</a></li>
                 </ul>
                 
@@ -63,6 +63,7 @@
                     <td>{{post.title}}</td>
                     <td>{{post.date|date("d/m/Y")}}</td>
                     <td>
+                        <a href="?c=activatePost&id={{post.id}}" class="btn btn-secondary btn-sm">Publier</a>
                         <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Modifier</a>
                         <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
                     </td>
@@ -97,8 +98,8 @@
                     <td>{{post.title}}</td>
                     <td>{{post.date|date("d/m/Y")}}</td>
                     <td>
-                        <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Publier</a>
-                        <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
+                        <a href="?c=activatePost&id={{post.id}}" class="btn btn-warning btn-sm">Publier</a>
+                        <a href="?c=deletePost&id={{post.id}}" class="btn btn-secondary btn-sm">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}

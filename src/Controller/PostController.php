@@ -49,6 +49,8 @@ class PostController extends CoreController{
             $comment = new Comment(null, null, $content, $name, $email, null, $post);   
 
         $commentRepository->create($comment);
+        $_SESSION['message'] = "votre commentaire sera publie tres bientot";
+        header('Location: ?c=show');
         }
 
         //On recupere la liste des commentaires publies
@@ -57,19 +59,15 @@ class PostController extends CoreController{
         //Affichage: article et commentaires
         $form = new CommentForm;
 
-        
-
-
-        
-
+           
+        $message = $_SESSION['message'] ?? NULL;
 
         echo $this->twig->render('showpage.html.twig', [
             'post'=>$post,
             'comments'=>$comments,
-            'commentForm' => $form->commentForm()->createForm()
-        ]);
-        
-        
+            'commentForm' => $form->commentForm()->createForm(),
+            'message'=> $message
+        ]);    
 
     }
 
@@ -109,10 +107,10 @@ class PostController extends CoreController{
                 $postRepository = new PostRepository;
 
                 
-                $post = new Post(null, $title, $author, $date, $content, null, $this->getConnectedUser());
+                $post = new Post(null, $title, $author, $date, $content, 0, 0, $this->getConnectedUser());
                 $postRepository->create($post);
                 
-                $_SESSION['message'] = "votre article a ete cree avec succes!";
+                $_SESSION['message'] = "votre article a ete enregistre, il sera publie tres bientot";
                 header('Location: ?c=profile');
             
         }
@@ -205,6 +203,7 @@ class PostController extends CoreController{
    
     }
 
+    
     public function delete(int $id){
         if($this->isConnected() && !empty($_POST['title'])){
 

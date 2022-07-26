@@ -59,6 +59,11 @@
       case 'update':
          $controller=new PostController;
          $controller->update($id);
+         break;  
+
+      case 'activatePost':
+         $controller=new AdminController;
+         $controller->activatePost($id);
          break;   
 
       case 'deletePost':
@@ -71,20 +76,30 @@
          $controller->allPosts();
          break;   
 
-      // case 'readPost':
-      //    $controller=new AdminController;
-      //    $controller->readPost();
-      //    break;      
-
       case 'comment':
          $controller=new AdminController;
-         $controller->readcomment();
+         $controller->displayComments();
          break;     
+
+      case 'activateComment':
+         $controller=new AdminController;
+         $controller->activateComment($id);
+         break;     
+         
+      case 'deleteComment':
+         $controller=new AdminController;
+         $controller->deleteComment($id);
+         break;          
 
       case 'message':
          $controller=new AdminController;
-         $controller->readMessage();
+         $controller->displayMessage();
          break;            
+
+      case 'deleteMessage':
+         $controller = new AdminController;
+         $controller->deleteMessage($id); 
+         break;  
 
       default: 
          $controller=new HomepageController;
