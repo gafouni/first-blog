@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Controller;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CoreController
 {
    protected $twig;
+   protected $session;
    
    public function __construct() {
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $this->twig = new \Twig\Environment($loader);
+    $this->session = new Session();
+    $this->session->start();
    }
 
    public function isConnected(){
@@ -18,7 +22,7 @@ class CoreController
 
    public function getConnectedUser(){
       
-      return(unserialize($_SESSION['user']));
+      return(unserialize($this->session->get('user')));
    }
 
    public function isAdmin(){

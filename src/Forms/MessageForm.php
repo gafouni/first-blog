@@ -25,7 +25,7 @@ class MessageForm extends Form{
             // ->addInput('text', 'active', ['id' => 'active', 'class' => 'form-control'])
             // ->addLabelFor('post', 'Article :')
             // ->addInput('text', 'post', ['id' => 'post', 'class' => 'form-control'])
-            ->addButton('Envoyer', ['class' => 'btn btn-primary'])
+            ->addButton('Envoyer', ['class' => 'btn btn-secondary'])
             ->finForm();
 
     }    

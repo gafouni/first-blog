@@ -19,7 +19,7 @@ class AdminController extends CoreController{
             $membersPosts = $postRepository->findAllByMembers(0);
             //var_dump($membersPosts);
         }else{
-            $_SESSION['message']="Vous n'avez pas acces a cette page";
+            $this->session->set('message', "Vous n'avez pas acces a cette page");
             header('Location:?c=profile');
         }
 
