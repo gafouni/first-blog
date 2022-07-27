@@ -19,7 +19,7 @@ class RegisterForm extends Form{
             ->addInput('password', 'password', ['id' => 'pass', 'class' => 'form-control'])
             ->addLabelFor('statut', 'Statut :')
             ->addSelect('statut', ['adminitrateur', 'membre', 'visiteur'], ['id'=>'statut', 'class'=>'form-control'])
-            ->addButton('M\'inscrire', ['class' => 'btn btn-primary'])
+            ->addButton('M\'inscrire', ['class' => 'btn btn-secondary'])
             ->finForm();
     }    
 

@@ -38,7 +38,7 @@
         </nav>
         <main class="mb-4">
             <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="row gx-4 gx-lg-5 justify-content-center bg-yellow">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         {% if message %}
                             <div class="alert alert-danger" role="alert">
@@ -47,7 +47,7 @@
                         {% endif %} 
                         <h2>Bonjour {{user.firstName}} ! </h2><br>
 
-                        <a class="btn btn-primary" href="?c=newPost" >Proposez un nouvel article</a><br>
+                        <a class="btn btn-secondary" href="?c=newPost" >Proposer un nouvel article</a><br><br><br>
 
                         <h3>Merci de nous avoir propose les articles ci-dessous:</h3>
 
@@ -66,6 +66,18 @@
                 </div>
             </div>
         </main>
+        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg');height: 150px; ">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center bg-yellow">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        {# <div class="page-heading">
+                            <h2>Contactez-moi</h2>
+                            <span class="subheading">N'hesitez pas a poser toutes vos questions</span>
+                        </div> #}
+                    </div>
+                </div>
+            </div>
+        </header>
 
 
 

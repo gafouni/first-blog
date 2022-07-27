@@ -22,7 +22,7 @@ class UpdateForm extends Form{
         ->addInput('date', 'publie', ['id' => 'publie', 'class' => 'form-control'])
         ->addLabelFor('user', 'Propose par :')
         ->addInput('text', 'user', ['id' => 'user', 'class' => 'form-control'])
-        ->addButton('Enregistrer', ['class' => 'btn btn-primary'])
+        ->addButton('Enregistrer', ['class' => 'btn btn-secondary'])
         ->finForm();
 }    
 

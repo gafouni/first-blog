@@ -11255,3 +11255,8 @@ header.masthead .post-heading .meta a {
 .bg-grey{
   background-color: darkgrey;
 }
+.cblack{
+  color:black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

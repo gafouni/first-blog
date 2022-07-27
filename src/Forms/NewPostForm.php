@@ -22,7 +22,7 @@ class NewPostForm extends Form{
             ->addInput('date', 'publie', ['id' => 'published', 'class' => 'form-control'])
             ->addLabelFor('user', 'Propose par :')
             ->addInput('text', 'user', ['id' => 'user', 'class' => 'form-control'])
-            ->addButton('Ajouter', ['class' => 'btn btn-primary'])
+            ->addButton('Ajouter', ['class' => 'btn btn-secondary'])
             ->finForm();
     }    
 
