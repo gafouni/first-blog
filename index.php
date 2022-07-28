@@ -9,11 +9,14 @@
     use App\Controller\PostController;
     use App\Controller\UserController;
     use App\Controller\AdminController;
+    use Symfony\Component\HttpFoundation\Request;
 
+    $request = Request::createFromGlobals();
+    //$request->query->get('id');
   
    
-   $controllerName=$_GET['c'] ?? null;
-   $id = $_GET['id'] ?? null;
+   $controllerName=$request->query->get('c') ?? null;
+   $id = $request->query->get('id') ?? null;
    switch($controllerName){
       case 'post': 
          $controller=new PostController;

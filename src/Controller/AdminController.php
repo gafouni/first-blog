@@ -49,7 +49,7 @@ class AdminController extends CoreController{
         $postRepository = new PostRepository;
         $postRepository->delete($post);
 
-        $_SESSION['message'] = "L'article a ete bien supprime";
+        $this->session->set('message', "L'article a ete bien supprime");
         header('Location:?c=admin');
         
     }
@@ -86,7 +86,7 @@ class AdminController extends CoreController{
         $commentRepository = new CommentRepository;
         $commentRepository->delete($comment);
 
-        $_SESSION['message'] = "L'article a ete bien supprime";
+        $this->session->set('message', "L'article a ete bien supprime");
         header('Location:?c=admin');
         
     }
@@ -109,7 +109,7 @@ class AdminController extends CoreController{
         //$commentRepository = new CommentRepository;
         $messageRepository->delete($message);
 
-        $_SESSION['message'] = "Le message a ete bien supprime";
+        $this->session->set('message',  "Le message a ete bien supprime");
         header('Location:?c=message');
         
     }

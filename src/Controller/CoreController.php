@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class CoreController
 {
    protected $twig;
    protected $session;
+   protected $request;
    
    public function __construct() {
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $this->twig = new \Twig\Environment($loader);
     $this->session = new Session();
+
+    $this->request = Request::createFromGlobals();
+
     $this->session->start();
    }
 
