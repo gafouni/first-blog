@@ -49,7 +49,7 @@ class PostController extends CoreController{
             $comment = new Comment(null, null, $content, $name, $email, null, $post);   
 
         $commentRepository->create($comment);
-        $_SESSION['message'] = "votre commentaire sera publie tres bientot";
+        $this->session->set('message', "votre commentaire sera publie tres bientot");
         header('Location: ?c=show');
         }
 
@@ -110,7 +110,7 @@ class PostController extends CoreController{
                 $post = new Post(null, $title, $author, $date, $content, 0, 0, $this->getConnectedUser());
                 $postRepository->create($post);
                 
-                $_SESSION['message'] = "votre article a ete enregistre, il sera publie tres bientot";
+                $this->session->set('message', "votre article a ete enregistre, il sera publie tres bientot");
                 header('Location: ?c=profile');
             
         }
@@ -135,16 +135,16 @@ class PostController extends CoreController{
         //Si l'annonce n'existe pas, on retourne a la liste des articles
             if(!$post){
                 http_response_code(404);
-                $_SESSION['erreur'] = "L'article recherche n'existe pas";
+                $this->session->set('erreur', "L'article recherche n'existe pas");
                 header('Location:?c=update');
-                exit;
+                //exit;
             }
 
             //On verifie si l'utilisateur est proprietaire de l'article
             if($post->getUser()->getId() !== $this->getConnectedUser()->getId() && !$this->isAdmin()){
-                $_SESSION['erreur'] = "Vous n'avez pas acces a cette page";
+                $this->session->set('erreur', "Vous n'avez pas acces a cette page");
                 header('Location:?c=post');
-                exit;
+                //exit;
             }
 
             //On verifie si le formulaire est valide
@@ -184,11 +184,11 @@ class PostController extends CoreController{
                 $postRepository->update($post);
 
                 if($this->isAdmin()){
-                    $_SESSION['message'] = "Votre article a ete modifie !";
+                    $this->session->set('message', "Votre article a ete modifie !");
                     header('Location:?c=admin');  
                 }else{    
 
-                    $_SESSION['message'] = "Votre article a ete modifie !";
+                    $this->session->set('message', "Votre article a ete modifie !");
                     header('Location:?c=profile');  
                 }
                 //$_SESSION['message'] = "votre article a ete modifie avec succes!";
@@ -207,20 +207,20 @@ class PostController extends CoreController{
     public function delete(int $id){
         if($this->isConnected() && !empty($this->request->request->get('title'))){
 
-            $id = strip_tags($_GET['id']);
+            $id = strip_tags($request->query->get('id'));
 
             $postRepository = new PostRepository;
             $post = $postRepository->find($id);
 
             //On verifie si le produit existe
             if(!$post){
-                $_SESSION['message'] = "L'article recherche n'existe pas";
+                $this->session->set('message', "L'article recherche n'existe pas");
                 header('Location:?c=profile');
             }    
 
             $postRepository->delete($post);
 
-            $_SESSION['message'] = "L'article a ete bien supprime";
+            $this->session->set('message', "L'article a ete bien supprime");
                 header('Location:?c=profile');
         }    
     
