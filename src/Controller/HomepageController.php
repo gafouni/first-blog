@@ -23,7 +23,7 @@ class HomepageController extends CoreController{
         $messageRepository = new MessageRepository;    
         $messageRepository->create($message);
         //var_dump('$message');
-        $_SESSION['message'] = "votre message a ete enregistre, vous recevrez une reponse tres bientot";
+        $this->session->set('message', "votre message a ete enregistre, vous recevrez une reponse tres bientot");
         header('Location: ?c=default');
         }       
        

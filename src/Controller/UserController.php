@@ -37,7 +37,7 @@ class UserController extends CoreController{
                 //Si l'utilisateur n'existe pas
                 if(!$user){
                    // var_dump('cccc');
-                    $_SESSION['message'] = 'L\'adresse e-mail et/ou le mot de passe est incorrect';
+                    $this->session->set('message', 'L\'adresse e-mail et/ou le mot de passe est incorrect');
                     header('location:?c=login');
                     
                 }    
@@ -55,7 +55,7 @@ class UserController extends CoreController{
                     
                 }else {
                     //var_dump('eee');
-                    $_SESSION['message'] = 'L\'adresse e-mail et/ou le mot de passe est incorrect';
+                    $this->session->set('message', 'L\'adresse e-mail et/ou le mot de passe est incorrect');
                     //header('location:?c=login');
                     exit;
                 }
@@ -64,11 +64,11 @@ class UserController extends CoreController{
                 
                     
                     if(($user->getStatus()) == ROLE_ADMIN){
-                        $_SESSION['message'] = "Vous etes connectes !";
+                        $this->session->set('message', "Vous etes connectes !");
                         header('Location:?c=admin');  
                     }else{    
 
-                        $_SESSION['message'] = "Vous etes connectes !";
+                        $this->session->set('message', "Vous etes connectes !");
                         header('Location:?c=profile');  
                     }
             
@@ -122,7 +122,7 @@ class UserController extends CoreController{
 
                 $userRepository->create($user);
 
-                $_SESSION['message'] = "Votre compte a ete cree avec succes !";
+                $this->session->set('message', "Votre compte a ete cree avec succes !");
                 header('Location: ?c=profile');
         }    
 
