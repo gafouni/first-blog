@@ -41,10 +41,10 @@ class PostController extends CoreController{
 
         //Creation d'un nouveau commentaire
 
-        if(!empty($_POST['content'])){
-            $content = $_POST['content'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
+        if(!empty($this->request->request->get('content'))){
+            $content = $this->request->request->get('content');
+            $name = $this->request->request->get('name');
+            $email = $this->request->request->get('email');
                   
             $comment = new Comment(null, null, $content, $name, $email, null, $post);   
 
@@ -60,7 +60,7 @@ class PostController extends CoreController{
         $form = new CommentForm;
 
            
-        $message = $_SESSION['message'] ?? NULL;
+        $message = $this->session->get('message') ?? NULL;
 
         echo $this->twig->render('showpage.html.twig', [
             'post'=>$post,
@@ -75,7 +75,7 @@ class PostController extends CoreController{
     public function addNewPost(){
         //On verifie si l'utilisateur est connecte
         
-        if($this->isConnected() && !empty($_POST['title'])){
+        if($this->isConnected() && !empty($this->request->request->get('title'))){
         
             //On verifie si le formulaire est valide
             $validator = new Validator($_POST);
@@ -97,11 +97,11 @@ class PostController extends CoreController{
             }    
 
                 //Protection contre les failles xss
-                $title = strip_tags($_POST['title']);
-                $author = strip_tags($_POST['author']);
-                $date = strip_tags($_POST['date']);
-                $content = strip_tags($_POST['content']);
-                $user = strip_tags($_POST['user']);
+                $title = strip_tags($this->request->request->get('title'));
+                $author = strip_tags($this->request->request->get('author'));
+                $date = strip_tags($this->request->request->get('date'));
+                $content = strip_tags($this->request->request->get('content'));
+                $user = strip_tags($this->request->request->get('user'));
 
                 //On hydrate l'utilisateur et on le stocke en base de donnees
                 $postRepository = new PostRepository;
@@ -127,7 +127,7 @@ class PostController extends CoreController{
         $post = $postRepository->find($id);
         
         //On verifie si l'utilisateur est connecte
-        if($this->isConnected() && !empty($_POST['title'])){
+        if($this->isConnected() && !empty($this->request->request->get('title'))){
             
 
             
@@ -168,10 +168,10 @@ class PostController extends CoreController{
 
                 //Protection contre les failles xss
                 //$id = strip_tags($_POST['id']);
-                $title = strip_tags($_POST['title']);
-                $author = strip_tags($_POST['author']);
-                $date = strip_tags($_POST['date']);
-                $content = strip_tags($_POST['content']);
+                $title = strip_tags($this->request->request->get('title'));
+                $author = strip_tags($this->request->request->get('author'));
+                $date = strip_tags($this->request->request->get('date'));
+                $content = strip_tags($this->request->request->get('content'));
                 //$user = strip_tags($_POST['user']);
 
                 //On stocke l'article
@@ -205,7 +205,7 @@ class PostController extends CoreController{
 
     
     public function delete(int $id){
-        if($this->isConnected() && !empty($_POST['title'])){
+        if($this->isConnected() && !empty($this->request->request->get('title'))){
 
             $id = strip_tags($_GET['id']);
 

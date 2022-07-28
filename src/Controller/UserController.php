@@ -14,7 +14,7 @@ class UserController extends CoreController{
     /**Creation du formulaire de connexion */
     public function login(){
         //var_dump($_POST);
-        if (isset($_POST['email']) ){
+        if (!empty($this->request->request->get('email')) ){
             //var_dump('aaaa');
             //On verifie si le formulaire est valide
             $validator = new Validator($_POST);
@@ -31,7 +31,7 @@ class UserController extends CoreController{
             }    
                 //On va chercher l'utilisateur dans la base de donnee
                 $userRepository = new UserRepository;
-                $user = $userRepository->findOneByEmail(strip_tags($_POST['email']));
+                $user = $userRepository->findOneByEmail(strip_tags($this->request->request->get('email')));
                 //var_dump($user);
                 
                 //Si l'utilisateur n'existe pas
@@ -48,7 +48,7 @@ class UserController extends CoreController{
 
                 //Verification du mot de passe
                 //var_dump($user);
-                if (password_verify($_POST['password'], $user->getPassword())){  
+                if (password_verify($this->request->request->get('password'), $user->getPassword())){  
                     //var_dump('dddd');
                     $userRepository->setSession($user);
                     header('Location:?c=profile');
@@ -87,10 +87,10 @@ class UserController extends CoreController{
 
     public function register(){
 
-        if (isset($_POST['email']) ){
+        if (!empty($this->request->request->get('email')) ){
 
-        $first_name = $_POST['prenom'];
-        $last_name = $_POST['nom'];
+        $first_name = $this->request->request->get('prenom');
+        $last_name = $this->request->request->get('nom');
 
             //On verifie si le formulaire est valide
             $validator = new Validator($_POST);
@@ -110,10 +110,10 @@ class UserController extends CoreController{
             }    
             
             //On nettoie l'adresse mail (strip_tags)
-                $email = strip_tags($_POST['email']);
+                $email = strip_tags($this->request->request->get('email'));
 
             // On chiffre le mot de passe
-                $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                $password = password_hash($this->request->request->get('password'), PASSWORD_BCRYPT);
 
             // On hydrate l'utilisateur et on le stocke en base de donnees
                 $userRepository = new UserRepository;

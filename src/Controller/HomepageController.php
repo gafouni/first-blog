@@ -11,12 +11,12 @@ class HomepageController extends CoreController{
 
            
 
-        if(!empty($_POST['content'])){
+        if(!empty($this->request->request->get('content'))){
             
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $subject = $_POST['subject'];
-            $content = $_POST['content'];
+            $name = $this->request->request->get('name');
+            $email = $this->request->request->get('email');
+            $subject = $this->request->request->get('subject');
+            $content = $this->request->request->get('content');
                   
             $message = new Message(null, $name, $email, null, $subject, $content);   
         
