@@ -29,7 +29,7 @@ class HomepageController extends CoreController{
        
         $form = new MessageForm;
 
-        echo $this->twig->render('homepage.html.twig', ['messageForm'=> $form->messageForm()->createForm()]);
+         $this->twig->display('homepage.html.twig', ['messageForm'=> $form->messageForm()->createForm()]);
         
        
         //echo $this->twig->render('homepage.html.twig');
@@ -55,7 +55,7 @@ class HomepageController extends CoreController{
        
         $form = new MessageForm;
 
-        echo $this->twig->render('homepage.html.twig', ['messageForm'=> $form->messageForm()->createForm()]);
+        $this->twig->display('homepage.html.twig', ['messageForm'=> $form->messageForm()->createForm()]);
         
     }
 

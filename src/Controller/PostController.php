@@ -17,7 +17,7 @@ class PostController extends CoreController{
         $posts = $postRepository->findAll();
 
 
-        echo $this->twig->render('postpage.html.twig', ['posts'=>$posts]);
+        $this->twig->display('postpage.html.twig', ['posts'=>$posts]);
         
     }
 
@@ -62,7 +62,7 @@ class PostController extends CoreController{
            
         $message = $this->session->get('message') ?? NULL;
 
-        echo $this->twig->render('showpage.html.twig', [
+        $this->twig->display('showpage.html.twig', [
             'post'=>$post,
             'comments'=>$comments,
             'commentForm' => $form->commentForm()->createForm(),
@@ -117,7 +117,7 @@ class PostController extends CoreController{
 
         $form = new NewPostForm;
 
-        echo $this->twig->render('newPost.html.twig', ['newPostForm' => $form->newPostForm()->createForm()]);
+        $this->twig->display('newPost.html.twig', ['newPostForm' => $form->newPostForm()->createForm()]);
         
     }
 
@@ -199,7 +199,7 @@ class PostController extends CoreController{
         //On envoie a la vue
         $form = new UpdateForm;
 
-        echo $this->twig->render('update.html.twig', ['updateForm' => $form->updateForm($post)->createForm()]);
+        $this->twig->display('update.html.twig', ['updateForm' => $form->updateForm($post)->createForm()]);
    
     }
 

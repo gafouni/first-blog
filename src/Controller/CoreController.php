@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CoreController
 {
+   
    protected $twig;
    protected $session;
    protected $request;
@@ -27,7 +28,7 @@ class CoreController
 
    public function getConnectedUser(){
       
-      return(unserialize($this->session->get('user')));
+      return(unserialize($_SESSION['user']));
    }
 
    public function isAdmin(){

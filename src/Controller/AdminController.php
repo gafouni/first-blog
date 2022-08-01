@@ -23,7 +23,7 @@ class AdminController extends CoreController{
             header('Location:?c=profile');
         }
 
-        echo $this->twig->render('admin.html.twig', ['posts'=>$posts, 'membersPosts'=>$membersPosts]);
+        $this->twig->display('admin.html.twig', ['posts'=>$posts, 'membersPosts'=>$membersPosts]);
           //var_dump($posts);
           //var_dump($membersPosts);
 
@@ -59,7 +59,7 @@ class AdminController extends CoreController{
             $commentRepository = new CommentRepository;
             $comments = $commentRepository->findAll(0);
           
-        echo $this->twig->render('comment.html.twig', ['comments'=>$comments]);
+        $this->twig->display('comment.html.twig', ['comments'=>$comments]);
         //var_dump($comments);
         
 
@@ -97,7 +97,7 @@ class AdminController extends CoreController{
         $messageRepository = new MessageRepository;
         $messages = $messageRepository->findAll();
           
-        echo $this->twig->render('message.html.twig', ['messages'=>$messages]);
+        $this->twig->display('message.html.twig', ['messages'=>$messages]);
 
     }
 
