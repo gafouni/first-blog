@@ -77,7 +77,7 @@ class UserController extends CoreController{
         $message = $_SESSION['message'] ?? NULL;
         $form = new LoginForm;
 
-        echo $this->twig->render('login.html.twig', ['loginForm' => $form->loginForm()->createForm(), 'message'=>$message]);
+        $this->twig->display('login.html.twig', ['loginForm' => $form->loginForm()->createForm(), 'message'=>$message]);
 
         
     
@@ -128,7 +128,7 @@ class UserController extends CoreController{
 
         $form = new RegisterForm;
 
-        echo $this->twig->render('register.html.twig', ['registerForm' => $form->registerForm()->createForm()]);
+        $this->twig->display('register.html.twig', ['registerForm' => $form->registerForm()->createForm()]);
     }
 
 
@@ -142,7 +142,7 @@ class UserController extends CoreController{
         //die;
         $message = $_SESSION['message'] ?? NULL;
 
-        echo $this->twig->render('profile.html.twig', ['user'=>$user, 'posts'=>$posts, 'message'=>$message] );
+        $this->twig->display('profile.html.twig', ['user'=>$user, 'posts'=>$posts, 'message'=>$message] );
 
     }
 
