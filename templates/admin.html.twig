@@ -39,9 +39,9 @@
 
         <h2>Administration des articles</h2><br>
 
-        <a class="btn btn-secondary" href="?c=newPost" >Creer un article</a><br><br>
+        <a class="btn btn-secondary" href="?c=newPost" >Proposer un article</a><br><br>
 
-        <h3>Liste des articles publies</h3><br>
+        <h3>Liste des articles a publier</h3><br>
     </div>    
 
     <div class="row justify-content-center bg-yellow"> 
@@ -54,7 +54,7 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Titre</th>
-                <th scope="col">Publie le</th>
+                <th scope="col">Propose le</th>
                 <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -73,6 +73,11 @@
                 {% endfor %}
             </tbody>
             </table>
+            {% if message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %} 
         </div> 
         <div class="col-md-2 col-lg">
         </div><br><br><br>

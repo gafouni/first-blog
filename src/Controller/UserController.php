@@ -24,7 +24,7 @@ class UserController extends CoreController{
             ]);
 
             if ($errors) {
-                var_dump('bbbb');
+                //var_dump('bbbb');
                 $_SESSION['errors'][] = $errors;
                 header('location:?c=login');
                 
@@ -57,29 +57,29 @@ class UserController extends CoreController{
                     //var_dump('eee');
                     $this->session->set('message', 'L\'adresse e-mail et/ou le mot de passe est incorrect');
                     //header('location:?c=login');
-                    exit;
+                    
                 }
 
-                    
+                    $this->session->set('message', "Vous etes connectes !");
+                    header('Location:?c=profile'); 
                 
                     
-                    if(($user->getStatus()) == ROLE_ADMIN){
-                        $this->session->set('message', "Vous etes connectes !");
-                        header('Location:?c=admin');  
-                    }else{    
+                    // if(($user->getStatus()) == ROLE_ADMIN){
+                    //     $this->session->set('message', "Vous etes connectes !");
+                    //     header('Location:?c=admin');  
+                    // }else{    
 
-                        $this->session->set('message', "Vous etes connectes !");
-                        header('Location:?c=profile');  
-                    }
+                    //     $this->session->set('message', "Vous etes connectes !");
+                    //     header('Location:?c=profile');  
+                    // }
             
         }    
         
-        $message = $_SESSION['message'] ?? NULL;
+        //$message = $_SESSION['message'] ?? NULL;
+        $message = $this->session->get('message') ?? NULL;
         $form = new LoginForm;
 
         $this->twig->display('login.html.twig', ['loginForm' => $form->loginForm()->createForm(), 'message'=>$message]);
-
-        
     
     }
         
@@ -106,7 +106,7 @@ class UserController extends CoreController{
             if ($errors) {
                 $_SESSION['errors'][] = $errors;
                 header('location:?c=register');
-                exit;
+                
             }    
             
             //On nettoie l'adresse mail (strip_tags)
@@ -122,8 +122,8 @@ class UserController extends CoreController{
 
                 $userRepository->create($user);
 
-                $this->session->set('message', "Votre compte a ete cree avec succes !");
-                header('Location: ?c=profile');
+                $this->session->set('message', "Votre compte a ete cree; vous pouvez vous connecter");
+                header('Location: ?c=login');
         }    
 
         $form = new RegisterForm;
@@ -140,7 +140,8 @@ class UserController extends CoreController{
         $posts = $postRepository->findAllByUser($user, $active=1);
         //var_dump($posts);
         //die;
-        $message = $_SESSION['message'] ?? NULL;
+        //$message = $_SESSION['message'] ?? NULL;
+        $message = $this->session->get('message');
 
         $this->twig->display('profile.html.twig', ['user'=>$user, 'posts'=>$posts, 'message'=>$message] );
 
@@ -148,8 +149,8 @@ class UserController extends CoreController{
 
     public function logout(){
         
-            session_destroy();
-            header('Location:?c=login');
+        session_destroy();
+        header('Location:?c=login');
         
     }    
 

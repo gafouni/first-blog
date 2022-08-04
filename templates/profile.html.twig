@@ -52,14 +52,18 @@
                         <h3>Merci de nous avoir propose les articles ci-dessous:</h3>
 
                         {% for post in posts %}
+                            <!-- Divider-->
+                            <hr class="my-4" />
                             <a href="?c=show&id={{post.id}}">
-                                <h2 class="post-title">{{post.title}}</h2>
-                                <h3 class="post-subtitle">{{post.author}}</h3>
+                                <h4 class="post-title">{{post.title}}</h4>
+                                <h5 class="post-meta">Redige par: {{post.author}}</h5>
                             </a>
                             <p class="post-meta">
                                 Publie le
                                 {{post.date|date("d/m/Y")}} 
                             </p>
+                            <!-- Divider-->
+                            <hr class="my-4" />
                         {% endfor %}
                                       
                     </div>

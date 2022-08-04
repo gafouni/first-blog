@@ -67,15 +67,18 @@
 
                 {% for comment in comments %}
                     {# <a href="?c=show&id={{post.id}}"> #}
-                        <p class="post-title">{{comment.name}}</p>
-                        <p class="post-subtitle">{{comment.email}}</p>
-                        <p class="post-subtitle">Poste le {{comment.date|date("d/m/y")}}</p>
+                        <p class="post-title">Nom: {{comment.name}}</p>
+                        <p class="post-subtitle">Email: {{comment.email}}</p>
+                        <p class="post-subtitle">Poste le: {{comment.date|date("d/m/y")}}</p>
                     {# </a> #}
                     <p class="post-meta">
                         {{comment.content}} 
                     </p>
+                    <!-- Divider-->
+                    <hr class="my-4" />
                 {% endfor %}
-                    
+
+               
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <h3>Ajouter un commentaire</h3>

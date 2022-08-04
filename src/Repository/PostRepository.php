@@ -24,7 +24,7 @@ class PostRepository extends CoreRepository{
 
     public function findAll($active = 1): array{
         $posts=[];
-        $pdo_st=$this->pdo->prepare('select * from post WHERE active = :active order by `date` desc');
+        $pdo_st=$this->pdo->prepare('select * from post WHERE active = :active order by `published` desc');
         $pdo_st->bindValue(':active', $active);
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
@@ -51,7 +51,8 @@ class PostRepository extends CoreRepository{
         foreach($postsData as $postData){
             $posts[]= new Post($postData['id'], $postData['title'], $postData['author'], $postData['date'], $postData['content'], $postData['active'], $postData['published'], $userRepository->find($postData['id_user']));
         }
-    
+        // var_dump($posts);
+        // die;
         return $posts;
     }
 
@@ -62,7 +63,7 @@ class PostRepository extends CoreRepository{
     public function findAllByMembers($active =1): array{
         $posts=[];
         $pdo_st=$this->pdo->prepare('select * from post p inner join `user` u on p.id_user=u.id where u.status is NULL AND active = :active order by p.`date` desc');
-        $pdo_st->bindValue('active', (int) $active);
+        $pdo_st->bindValue('active', $active);
         $pdo_st->execute();
         $postsData=$pdo_st->fetchAll();
         //var_dump($active);
@@ -71,8 +72,10 @@ class PostRepository extends CoreRepository{
         foreach($postsData as $postData){
             $posts[]= new Post($postData['id'], $postData['title'], $postData['author'], $postData['date'], $postData['content'], $postData['active'], $postData['published'], $userRepository->find($postData['id_user']));
         }
+        //var_dump($posts);
     
         return $posts;
+    
     }
 
     public function create( Post $post){

@@ -50,7 +50,7 @@ class PostController extends CoreController{
 
         $commentRepository->create($comment);
         $this->session->set('message', "votre commentaire sera publie tres bientot");
-        header('Location: ?c=show');
+        //header('Location: ?c=show');
         }
 
         //On recupere la liste des commentaires publies
@@ -90,10 +90,10 @@ class PostController extends CoreController{
             //die;
             
             if ($errors) {
-                var_dump('bbb');
+                //var_dump('bbb');
                 $_SESSION['errors'][] = $errors;
                 header('location:?c=newPost');
-                exit;
+                
             }    
 
                 //Protection contre les failles xss
@@ -163,7 +163,7 @@ class PostController extends CoreController{
                 //var_dump('bbb');
                 $_SESSION['errors'][] = $errors;
                 header('location:?c=update');
-                exit;
+                
             }    
 
                 //Protection contre les failles xss
@@ -213,7 +213,7 @@ class PostController extends CoreController{
             $post = $postRepository->find($id);
 
             //On verifie si le produit existe
-            if(!$post){
+            if(!isset($post)){
                 $this->session->set('message', "L'article recherche n'existe pas");
                 header('Location:?c=profile');
             }    
