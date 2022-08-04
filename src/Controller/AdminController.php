@@ -20,10 +20,13 @@ class AdminController extends CoreController{
             //var_dump($membersPosts);
         }else{
             $this->session->set('message', "Vous n'avez pas acces a cette page");
-            header('Location:?c=profile');
+            //header('Location:?c=profile');
+            $this->redirect('?c=profile');
         }
 
-        $this->twig->display('admin.html.twig', ['posts'=>$posts, 'membersPosts'=>$membersPosts]);
+        $message = $this->session->get('message') ?? NULL;
+        
+        $this->twig->display('admin.html.twig', ['posts'=>$posts, 'membersPosts'=>$membersPosts, 'message'=>$message]);
           //var_dump($posts);
           //var_dump($membersPosts);
 
@@ -36,7 +39,7 @@ class AdminController extends CoreController{
         
         $postRepository->activatePost($post);
         //var_dump('$post');
-        header('Location:?c=admin'); 
+        $this->redirect('?c=admin'); 
 
     }
 
@@ -45,12 +48,15 @@ class AdminController extends CoreController{
 
         $postRepository = new PostRepository;
         $post = $postRepository->find($id);
+        var_dump($post);
+        die;
         
         $postRepository = new PostRepository;
         $postRepository->delete($post);
 
         $this->session->set('message', "L'article a ete bien supprime");
-        header('Location:?c=admin');
+        $this->redirect('?c=admin'); 
+        //header('Location:?c=admin');
         
     }
 
@@ -73,7 +79,8 @@ class AdminController extends CoreController{
 
         $commentRepository->activate($comment);
 
-        header('Location: ?c=comment');       
+        $this->redirect('?c=comment'); 
+        //header('Location: ?c=comment');       
             
          
     }
@@ -87,7 +94,8 @@ class AdminController extends CoreController{
         $commentRepository->delete($comment);
 
         $this->session->set('message', "L'article a ete bien supprime");
-        header('Location:?c=admin');
+        $this->redirect('?c=admin'); 
+        //header('Location:?c=admin');
         
     }
         
@@ -110,7 +118,8 @@ class AdminController extends CoreController{
         $messageRepository->delete($message);
 
         $this->session->set('message',  "Le message a ete bien supprime");
-        header('Location:?c=message');
+        $this->redirect('?c=message'); 
+        //header('Location:?c=message');
         
     }
 

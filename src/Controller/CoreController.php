@@ -15,9 +15,7 @@ class CoreController
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $this->twig = new \Twig\Environment($loader);
     $this->session = new Session();
-
     $this->request = Request::createFromGlobals();
-
     $this->session->start();
    }
 
@@ -28,7 +26,8 @@ class CoreController
 
    public function getConnectedUser(){
       
-      return(unserialize($_SESSION['user']));
+     return(unserialize($_SESSION['user']));
+      //return(unserialize($this->session->get('user')));
    }
 
    public function isAdmin(){
@@ -36,4 +35,8 @@ class CoreController
       return(($this->getConnectedUser()->getStatus()) == 'ROLE_ADMIN');
    }
    
+   public function redirect($url){
+      header('Location: '.$url);
+   }
+
 }

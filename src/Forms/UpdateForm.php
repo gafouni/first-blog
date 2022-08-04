@@ -18,10 +18,10 @@ class UpdateForm extends Form{
         ->addInput('date', 'date', ['id' => 'date', 'class' =>'form-control', 'value' =>$post->getDate()])
         ->addLabelFor('contenu', 'Contenu de l\'article :')
         ->addTextarea('content', $post->getContent(), ['id' => 'contenu', 'class' => 'form-control'])
-        ->addLabelFor('publie', 'Publie le :')
-        ->addInput('date', 'publie', ['id' => 'publie', 'class' => 'form-control'])
-        ->addLabelFor('user', 'Propose par :')
-        ->addInput('text', 'user', ['id' => 'user', 'class' => 'form-control'])
+        // ->addLabelFor('publie', 'Publie le :')
+        // ->addInput('date', 'publie', ['id' => 'publie', 'class' => 'form-control'])
+        // ->addLabelFor('user', 'Propose par :')
+        // ->addInput('text', 'user', ['id' => 'user', 'class' => 'form-control'])
         ->addButton('Enregistrer', ['class' => 'btn btn-secondary'])
         ->finForm();
 }    

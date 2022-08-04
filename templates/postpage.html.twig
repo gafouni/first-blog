@@ -25,13 +25,13 @@
           {% for post in posts %}
             <a href="?c=show&id={{post.id}}">
                 <h4 class="post-title">{{post.title}}</h4>
-                <h4 class="post-subtitle">{{post.author}}</h4>
+                <h4 class="post-subtitle">Auteur : {{post.author}}</h4>
             </a>
-            <p class="post-meta">
-                Publie 
+            <h5 class="post-subtitle">
+                Propose par
                 {{post.user.first_name}} {{post.user.last_name}}
-                le {{post.date|date("d/m/Y")}} 
-            </p>
+                 et publie le {{post.published|date("d/m/Y")}} 
+            </h5>
           {% endfor %}
 
         </div>

@@ -24,7 +24,8 @@ class HomepageController extends CoreController{
         $messageRepository->create($message);
         //var_dump('$message');
         $this->session->set('message', "votre message a ete enregistre, vous recevrez une reponse tres bientot");
-        header('Location: ?c=default');
+        $this->redirect('?c=default'); 
+        //header('Location: ?c=default');
         }       
        
         $form = new MessageForm;

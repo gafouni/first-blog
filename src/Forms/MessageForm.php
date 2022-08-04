@@ -10,8 +10,8 @@ class MessageForm extends Form{
 
 
         return $this->debutForm()
-            ->addLabelFor('date', 'Date :')
-            ->addInput('text', 'date', ['id' => 'date', 'class' =>'form-control'])
+            // ->addLabelFor('date', 'Date :')
+            // ->addInput('text', 'date', ['id' => 'date', 'class' =>'form-control'])
             ->addLabelFor('name', 'Nom et prenom :')
             ->addInput('text', 'name', ['id' => 'name', 'class' =>'form-control'])
             ->addLabelFor('email', 'E-mail :')
