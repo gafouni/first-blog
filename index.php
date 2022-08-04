@@ -24,14 +24,11 @@
          break;  
 
       case 'show': 
-         if (!empty($id)) {
-            $controller=new PostController;
-            $controller->show($id);
-        }
-        else {
-            echo 'Erreur : aucun identifiant de billet envoyé';
-        }
-      break;   
+         
+         $controller=new PostController;
+         $controller->show($id);
+        
+         break;   
 
       case 'login':
          $controller=new UserController;
