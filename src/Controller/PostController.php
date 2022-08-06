@@ -168,8 +168,8 @@ class PostController extends CoreController{
                 //var_dump('bbb');
                 //$_SESSION['errors'][] = $errors;
                 $this->session->set('errors[]', $errors);
-            $this->redirect('?c=update'); 
-        //header('location:?c=update');
+                $this->redirect('?c=update'); 
+                //header('location:?c=update');
                 
             }    
 

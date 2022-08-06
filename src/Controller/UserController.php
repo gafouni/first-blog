@@ -109,7 +109,8 @@ class UserController extends CoreController{
             //var_dump($errors); die();
 
             if ($errors) {
-                $_SESSION['errors'][] = $errors;
+                $this->session->set('errors[]', $errors);
+                //$_SESSION['errors'][] = $errors;
                 $this->redirect('?c=register');
                 //header('location:?c=register');
                 
