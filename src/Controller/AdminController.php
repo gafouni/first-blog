@@ -48,8 +48,8 @@ class AdminController extends CoreController{
 
         $postRepository = new PostRepository;
         $post = $postRepository->find($id);
-        var_dump($post);
-        die;
+        // var_dump($post);
+        // die;
         
         $postRepository = new PostRepository;
         $postRepository->delete($post);

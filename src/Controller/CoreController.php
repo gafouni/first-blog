@@ -26,8 +26,8 @@ class CoreController
 
    public function getConnectedUser(){
       
-     return(unserialize($_SESSION['user']));
-      //return(unserialize($this->session->get('user')));
+     //return(unserialize($_SESSION['user']));
+      return(unserialize($this->session->get('user')));
    }
 
    public function isAdmin(){

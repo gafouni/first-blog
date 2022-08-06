@@ -78,7 +78,7 @@ class PostController extends CoreController{
         if($this->isConnected() && !empty($this->request->request->get('title'))){
         
             //On verifie si le formulaire est valide
-            $validator = new Validator($_POST);
+            $validator = new Validator($this->request->request->all());
             $errors =  $validator->validate([
                 'title' =>['required'],
                 'author' =>['required'],
@@ -91,8 +91,9 @@ class PostController extends CoreController{
             
             if ($errors) {
                 //var_dump('bbb');
-                $_SESSION['errors'][] = $errors;
-                header('location:?c=newPost');
+                $this->session->set('errors[]', $errors);
+                $this->redirect('?c=newpost'); 
+        //header('location:?c=newPost');
                 
             }    
 
@@ -111,7 +112,8 @@ class PostController extends CoreController{
                 $postRepository->create($post);
                 
                 $this->session->set('message', "votre article a ete enregistre, il sera publie tres bientot");
-                header('Location: ?c=profile');
+                $this->redirect('?c=profile'); 
+        //header('Location: ?c=profile');
             
         }
 
@@ -136,19 +138,22 @@ class PostController extends CoreController{
             if(!$post){
                 http_response_code(404);
                 $this->session->set('erreur', "L'article recherche n'existe pas");
-                header('Location:?c=update');
+                $this->redirect('?c=update'); 
+        //header('Location:?c=update');
                 //exit;
             }
 
             //On verifie si l'utilisateur est proprietaire de l'article
             if($post->getUser()->getId() !== $this->getConnectedUser()->getId() && !$this->isAdmin()){
                 $this->session->set('erreur', "Vous n'avez pas acces a cette page");
-                header('Location:?c=post');
+                $this->redirect('?c=post'); 
+                
+                //header('Location:?c=post');
                 //exit;
             }
 
             //On verifie si le formulaire est valide
-            $validator = new Validator($_POST);
+            $validator = new Validator($this->request->request->all());
             $errors =  $validator->validate([
                 'title' =>['required'],
                 'author' =>['required'],
@@ -162,7 +167,8 @@ class PostController extends CoreController{
             if ($errors) {
                 //var_dump('bbb');
                 $_SESSION['errors'][] = $errors;
-                header('location:?c=update');
+            $this->redirect('?c=update'); 
+        //header('location:?c=update');
                 
             }    
 
@@ -189,7 +195,8 @@ class PostController extends CoreController{
                 }else{    
 
                     $this->session->set('message', "Votre article a ete modifie !");
-                    header('Location:?c=profile');  
+                    $this->redirect('?c=profile'); 
+        //header('Location:?c=profile');  
                 }
                 //$_SESSION['message'] = "votre article a ete modifie avec succes!";
                 //header('Location: ?c=profile');
@@ -215,7 +222,8 @@ class PostController extends CoreController{
             //On verifie si le produit existe
             if(!isset($post)){
                 $this->session->set('message', "L'article recherche n'existe pas");
-                header('Location:?c=profile');
+                $this->redirect('?c=profile'); 
+       // header('Location:?c=profile');
             }    
 
             $postRepository->delete($post);

@@ -17,7 +17,7 @@ class UserController extends CoreController{
         if (!empty($this->request->request->get('email')) ){
             //var_dump('aaaa');
             //On verifie si le formulaire est valide
-            $validator = new Validator($_POST);
+            $validator = new Validator($this->request->request->all());
             $errors =  $validator->validate([
                 'email' =>['required'],
                 'password' =>['required', 'min:6']
@@ -93,7 +93,7 @@ class UserController extends CoreController{
         $last_name = $this->request->request->get('nom');
 
             //On verifie si le formulaire est valide
-            $validator = new Validator($_POST);
+            $validator = new Validator($this->request->request->all());
             $errors =  $validator->validate([
                 'first_name' =>['required'],
                 'last_name' =>['required'],
