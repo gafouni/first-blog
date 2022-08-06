@@ -102,7 +102,7 @@ class PostController extends CoreController{
                 $author = strip_tags($this->request->request->get('author'));
                 $date = strip_tags($this->request->request->get('date'));
                 $content = strip_tags($this->request->request->get('content'));
-                $user = strip_tags($this->request->request->get('user'));
+                //$user = strip_tags($this->request->request->get('user'));
 
                 //On hydrate l'utilisateur et on le stocke en base de donnees
                 $postRepository = new PostRepository;

@@ -42,7 +42,7 @@ class Validator {
 
         $value = trim($value);
         
-        if (!isset($value) || is_null($value) || empty($value)){
+        if (!isset($value) || ($value === NULL) || empty($value)){
             $this->errors[$name][] = "{$name} est requis.";
         }
     }
