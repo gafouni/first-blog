@@ -166,7 +166,8 @@ class PostController extends CoreController{
             
             if ($errors) {
                 //var_dump('bbb');
-                $_SESSION['errors'][] = $errors;
+                //$_SESSION['errors'][] = $errors;
+                $this->session->set('errors[]', $errors);
             $this->redirect('?c=update'); 
         //header('location:?c=update');
                 
@@ -191,12 +192,13 @@ class PostController extends CoreController{
 
                 if($this->isAdmin()){
                     $this->session->set('message', "Votre article a ete modifie !");
-                    header('Location:?c=admin');  
+                    $this->redirect('?c=admin');
+                    //header('Location:?c=admin');  
                 }else{    
 
                     $this->session->set('message', "Votre article a ete modifie !");
                     $this->redirect('?c=profile'); 
-        //header('Location:?c=profile');  
+                    //header('Location:?c=profile');  
                 }
                 //$_SESSION['message'] = "votre article a ete modifie avec succes!";
                 //header('Location: ?c=profile');
@@ -229,7 +231,8 @@ class PostController extends CoreController{
             $postRepository->delete($post);
 
             $this->session->set('message', "L'article a ete bien supprime");
-                header('Location:?c=profile');
+                $this->redirect('profile');
+                //header('Location:?c=profile');
         }    
     
     }

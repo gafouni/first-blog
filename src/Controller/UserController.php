@@ -25,8 +25,10 @@ class UserController extends CoreController{
 
             if ($errors) {
                 //var_dump('bbbb');
-                $_SESSION['errors'][] = $errors;
-                header('location:?c=login');
+                //$_SESSION['errors'][] = $errors;
+                $this->session->set('errors[]', $errors);
+                $this->redirect('?c=login');
+                //header('location:?c=login');
                 
             }    
                 //On va chercher l'utilisateur dans la base de donnee
@@ -38,7 +40,8 @@ class UserController extends CoreController{
                 if(!$user){
                    // var_dump('cccc');
                     $this->session->set('message', 'L\'adresse e-mail et/ou le mot de passe est incorrect');
-                    header('location:?c=login');
+                    $this->redirect('?c=login');
+                    //header('location:?c=login');
                     
                 }    
 
@@ -51,7 +54,8 @@ class UserController extends CoreController{
                 if (password_verify($this->request->request->get('password'), $user->getPassword())){  
                     //var_dump('dddd');
                     $userRepository->setSession($user);
-                    header('Location:?c=profile');
+                    $this->redirect('?c=profile');
+                    //header('Location:?c=profile');
                     
                 }else {
                     //var_dump('eee');
@@ -61,7 +65,8 @@ class UserController extends CoreController{
                 }
 
                     $this->session->set('message', "Vous etes connectes !");
-                    header('Location:?c=profile'); 
+                    $this->redirect('?c=profile');
+                    //header('Location:?c=profile'); 
                 
                     
                     // if(($user->getStatus()) == ROLE_ADMIN){
@@ -105,7 +110,8 @@ class UserController extends CoreController{
 
             if ($errors) {
                 $_SESSION['errors'][] = $errors;
-                header('location:?c=register');
+                $this->redirect('?c=register');
+                //header('location:?c=register');
                 
             }    
             
@@ -123,7 +129,8 @@ class UserController extends CoreController{
                 $userRepository->create($user);
 
                 $this->session->set('message', "Votre compte a ete cree; vous pouvez vous connecter");
-                header('Location: ?c=login');
+                $this->redirect('?c=login');
+                //header('Location: ?c=login');
         }    
 
         $form = new RegisterForm;
@@ -150,7 +157,8 @@ class UserController extends CoreController{
     public function logout(){
         
         session_destroy();
-        header('Location:?c=login');
+        $this->redirect('?c=login');
+        //header('Location:?c=login');
         
     }    
 
