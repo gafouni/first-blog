@@ -67,17 +67,13 @@
                     <td>
                         <a href="?c=activatePost&id={{post.id}}" class="btn btn-secondary btn-sm">Publier</a>
                         <a href="?c=update&id={{post.id}}" class="btn btn-warning btn-sm">Modifier</a>
-                        <a href="?c=deletePost" class="btn btn-secondary btn-sm">Supprimer</a>
+                        <a href="?c=deletePost&id={{post.id}}" class="btn btn-secondary btn-sm">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}
             </tbody>
             </table>
-            {% if message %}
-                <div class="alert alert-danger" role="alert">
-                    {{ message }}
-                </div>
-            {% endif %} 
+            
         </div> 
         <div class="col-md-2 col-lg">
         </div><br><br><br>

@@ -4,7 +4,7 @@ namespace App\Validation;
 
 class Validator {
 
-    //Les donnees qui vont etre entrees par les utilisateurs ($_POST)
+    //Les donnees qui vont etre entrees par les utilisateurs 
     private $data;
     private $errors;
 
@@ -43,7 +43,7 @@ class Validator {
         $value = trim($value);
         
         if (!isset($value) || ($value === NULL) || empty($value)){
-            $this->errors[$name][] = "{$name} est requis.";
+            $this->errors[$name][] = "Ce champ est obligatoire.";
         }
     }
 
@@ -54,7 +54,7 @@ class Validator {
         $limit = (int) $matches[0][0];
 
         if (strlen($value) < $limit){
-            $this->errors[$name][] = "{$name} doit comprendre un minimum de {$limit} caracteres";
+            $this->errors[$name][] = "Le mot de passe doit avoir un minimum de {$limit} caracteres";
         }
 
     }

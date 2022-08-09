@@ -18,6 +18,7 @@ class UserController extends CoreController{
             //var_dump('aaaa');
             //On verifie si le formulaire est valide
             $validator = new Validator($this->request->request->all());
+            var_dump($errors);
             $errors =  $validator->validate([
                 'email' =>['required'],
                 'password' =>['required', 'min:6']
@@ -28,9 +29,9 @@ class UserController extends CoreController{
                 //$_SESSION['errors'][] = $errors;
                 $this->session->set('errors[]', $errors);
                 $this->redirect('?c=login');
-                //header('location:?c=login');
-                
+                //header('location:?c=login');                
             }    
+            
                 //On va chercher l'utilisateur dans la base de donnee
                 $userRepository = new UserRepository;
                 $user = $userRepository->findOneByEmail(strip_tags($this->request->request->get('email')));
@@ -54,18 +55,19 @@ class UserController extends CoreController{
                 if (password_verify($this->request->request->get('password'), $user->getPassword())){  
                     //var_dump('dddd');
                     $userRepository->setSession($user);
+                    $this->session->set('message', "Vous etes connectes !");
                     $this->redirect('?c=profile');
                     //header('Location:?c=profile');
                     
                 }else {
                     //var_dump('eee');
                     $this->session->set('message', 'L\'adresse e-mail et/ou le mot de passe est incorrect');
-                    //header('location:?c=login');
+                    header('location:?c=login');
                     
                 }
 
-                    $this->session->set('message', "Vous etes connectes !");
-                    $this->redirect('?c=profile');
+                    //$this->session->set('message', "Vous etes connectes !");
+                    //$this->redirect('?c=profile');
                     //header('Location:?c=profile'); 
                 
                     

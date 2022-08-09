@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserRepository extends CoreRepository{
+
     public function find(int $id): ?User{
         $pdo_st=$this->pdo->prepare('select * from `user` where id = :id');
         $pdo_st->bindValue(':id',$id);
@@ -44,6 +46,8 @@ class UserRepository extends CoreRepository{
 
 
     public function setSession(User $user){
+        $this->session = new Session();
+
         //$_SESSION['user'] = serialize($user);
         $this->session->set('user', serialize($user));
                

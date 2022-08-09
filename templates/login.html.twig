@@ -27,6 +27,15 @@
                             </div>
                         {% endif %} 
                         <h3>Heureux de vous revoir, connectez-vous!</h3>
+
+                        {% if errors %}
+                            {% for errorsArray in errors %}
+                                {% for error in errorsArray %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}            
+                         
                         <div class="my-5">
                         
                         {{ loginForm|raw }}

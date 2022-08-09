@@ -29,7 +29,7 @@
             </a>
             <h5 class="post-subtitle">
                 Propose par
-                {{post.user.first_name}} {{post.user.last_name}}
+                {{post.user.firstName}} {{post.user.lastName}}
                  et publie le {{post.published|date("d/m/Y")}} 
             </h5>
           {% endfor %}
@@ -40,7 +40,9 @@
         <hr class="my-4"/>
 
         <!-- Pager-->
-        <div class="d-flex justify-content-end mb-4"><a class="btn btn-secondary text-uppercase" href="">Voir plus →</a></div>
+        {% if full  == false %}
+        <div class="d-flex justify-content-end mb-4"><a class="btn btn-secondary text-uppercase" href="?c=post&full=1">Voir plus →</a></div>
+        {% endif %}
     </div>
 </div>        
 <header class="masthead" style="background-image: url('assets/img/post-bg.jpg');height: 250px; ">

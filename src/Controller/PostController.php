@@ -13,11 +13,13 @@ use App\Repository\CommentRepository;
 
 class PostController extends CoreController{ 
     public function display_list(){
+        $full = $this->request->query->get('full') ?? false;
+        //var_dump($full);
         $postRepository = new PostRepository;
-        $posts = $postRepository->findAll();
+        $posts = $postRepository->findAll(1, $full);
 
 
-        $this->twig->display('postpage.html.twig', ['posts'=>$posts]);
+        $this->twig->display('postpage.html.twig', ['posts'=>$posts, 'full'=>$full]);
         
     }
 
