@@ -5,4 +5,4 @@ Toute personne peut s'inscrire afin de devenr membre et proposer des articles su
 ***
 ## base de donnees
 Base de donnees mysql a installer sur Phpmyadmin. L'identifiant et le mot de passe sont visibles dans le fichier: src/Repository/CoreRepository.
-
+la base de donnees se trouve a la racine du projet, dans le fichier: Base de donnees/Base de donnees firstblog (3).sql
